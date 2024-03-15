@@ -2,14 +2,14 @@ import ResetPassWord from "@/components/reset-password";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-   title: "Reset PassWord Xeco - ICO & Crypto Landing Page React Next js Template",
+  title: "Agriland",
 };
 const index = () => {
-   return (
-      <Wrapper>
-         <ResetPassWord />
-      </Wrapper>
-   )
-}
+  return (
+    <Wrapper>
+      <ResetPassWord />
+    </Wrapper>
+  );
+};
 
-export default index
+export default index;

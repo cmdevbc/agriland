@@ -36,10 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta
-          name="description"
-          content="Xeco - ICO & Crypto Landing Page Template"
-        />
+        <meta name="description" content="Agriland" />
         <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
       <body

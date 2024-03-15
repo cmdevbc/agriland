@@ -4,20 +4,21 @@ import blog_data from "@/data/BlogData";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-   title: "Blog Details Xeco - ICO & Crypto Landing Page React Next js Template",
+  title: "Agriland",
 };
 const index = ({ params }: { params: { id: number } }) => {
+  const single_blog = blog_data.find(
+    (item) => Number(item.id) === Number(params.id)
+  );
 
-   const single_blog = blog_data.find((item) => Number(item.id) === Number(params.id));
+  return (
+    <Wrapper>
+      <main>
+        <Breadcrumb title="Blog Details" />
+        <BlogDetailsArea single_blog={single_blog} key={single_blog?.id} />
+      </main>
+    </Wrapper>
+  );
+};
 
-   return (
-      <Wrapper>
-         <main>
-            <Breadcrumb title="Blog Details" />
-            <BlogDetailsArea  single_blog={single_blog} key={single_blog?.id} />
-         </main>
-      </Wrapper>
-   )
-}
-
-export default index
+export default index;

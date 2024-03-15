@@ -2,14 +2,14 @@ import Contact from "@/components/contact";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-   title: "Contact Xeco - ICO & Crypto Landing Page React Next js Template",
+  title: "Agriland",
 };
 const index = () => {
-   return (
-      <Wrapper>
-         <Contact />
-      </Wrapper>
-   )
-}
+  return (
+    <Wrapper>
+      <Contact />
+    </Wrapper>
+  );
+};
 
-export default index
+export default index;

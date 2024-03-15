@@ -15,12 +15,7 @@ const Home = () => {
       <Banner />
       <Contribution />
       <FeatureOne />
-      <FeatureTwo />
-      <ChartArea />
       <RoadMapArea />
-      <Team />
-      <FAQ />
-      <DownloadArea />
     </>
   );
 };

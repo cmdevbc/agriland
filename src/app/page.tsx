@@ -2,7 +2,7 @@ import Home from "@/components/home";
 import Wrapper from "@/layout/Wrapper";
 
 export const metadata = {
-  title: "Xeco - ICO & Crypto Landing Page React Next js Template",
+  title: "Agriland",
 };
 const index = () => {
   return (
