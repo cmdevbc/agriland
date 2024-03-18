@@ -21,13 +21,13 @@ const menu_data: MenuItem[] = [
     id: 2,
     has_dropdown: false,
     title: "BUY $ALT",
-    link: "/#feature",
+    link: "/#buy",
   },
   {
     id: 3,
     has_dropdown: false,
     title: "How to Buy",
-    link: "/#chart",
+    link: "/#how",
   },
   {
     id: 4,
@@ -36,10 +36,10 @@ const menu_data: MenuItem[] = [
     link: "/#roadMap",
   },
   {
-    id: 6,
+    id: 5,
     has_dropdown: false,
     title: "Contact",
-    link: "/contact",
+    link: "/#contact",
   },
 ];
 export default menu_data;

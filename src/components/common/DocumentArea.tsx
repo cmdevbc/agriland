@@ -13,7 +13,7 @@ const doc_data: string[] = [
 
 const DocumentArea = () => {
   return (
-    <section className="document-area">
+    <section id="contact" className="document-area">
       <div className="container">
         <div className="document-inner-wrap">
           <div className="row">
@@ -32,9 +32,6 @@ const DocumentArea = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="document-shape">
-        <Image src={docShape} alt="" className="alltuchtopdown" />
       </div>
     </section>
   );

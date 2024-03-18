@@ -6,7 +6,7 @@ import contributionShape_2 from "@/assets/img/images/contribution_shape02.png";
 
 const Contribution = () => {
   return (
-    <section id="contribution" className="contribution-area pt-130 pb-130">
+    <section id="buy" className="contribution-area pt-130 pb-130">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-10">
@@ -38,10 +38,6 @@ const Contribution = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="contribution-shape-wrap">
-        <Image src={contributionShape_1} alt="" className="alltuchtopdown" />
-        <Image src={contributionShape_2} alt="" className="leftToRight" />
       </div>
     </section>
   );

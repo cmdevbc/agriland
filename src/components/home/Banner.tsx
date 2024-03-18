@@ -2,8 +2,8 @@
 import Image from "next/image";
 import CountdownClock from "@/ui/CountDownClock";
 
-import bannerShape_1 from "@/assets/img/banner/tractor.png";
-import bannerShape_2 from "@/assets/img/banner/hand.png";
+import bannerShape_1 from "@/assets/img/banner/farm1.png";
+import bannerShape_2 from "@/assets/img/banner/farm2.png";
 
 const Banner = () => {
   return (
