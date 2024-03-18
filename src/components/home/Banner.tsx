@@ -2,8 +2,8 @@
 import Image from "next/image";
 import CountdownClock from "@/ui/CountDownClock";
 
-import bannerShape_1 from "@/assets/img/banner/banner_shape01.png";
-import bannerShape_2 from "@/assets/img/banner/banner_shape02.png";
+import bannerShape_1 from "@/assets/img/banner/tractor.png";
+import bannerShape_2 from "@/assets/img/banner/hand.png";
 
 const Banner = () => {
   return (
@@ -24,6 +24,9 @@ const Banner = () => {
                 <div className="coming-time" data-countdown="2024/8/29">
                   <CountdownClock />
                 </div>
+              </div>
+              <div className="banner-content text-center banner-sub-title">
+                Countdown until Round 1 ends
               </div>
             </div>
           </div>

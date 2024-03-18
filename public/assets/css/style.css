@@ -43,7 +43,7 @@
 :root {
     --tg-body-font-family: 'Outfit', sans-serif;
     --tg-heading-font-family: 'Plus Jakarta Sans', sans-serif;
-    --tg-primary-color: #44A08D;
+    --tg-primary-color: #35855B;
     --tg-secondary-color: #0F101E;
     --tg-body-font-color: #92939E;
     --tg-heading-font-color: #FFFFFF;
@@ -873,6 +873,21 @@ label {
     font-size: 20px;
     padding: 0;
 }
+.banner-sub-title {
+    margin-top: 30px;
+    color: white;
+    font-size:20px;
+}
+.roadmapHolder {
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+}
+.logo > a {
+    display:flex;
+    gap: 10px;
+    align-items:center;
+}
 .extra-info .logo-side img {
 	max-width: 151px;
 }
@@ -1566,7 +1581,7 @@ label {
     width: 19px;
     height: 19px;
     border-radius: 50%;
-    background: #44A08D;
+    background: #35855B;
     position: absolute;
     left: 0;
     top: 3px;

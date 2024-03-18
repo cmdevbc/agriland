@@ -6,7 +6,7 @@ import Image from "next/image";
 import NavMenu from "./Menu/NavMenu";
 import { ConnectWallet } from "@thirdweb-dev/react";
 
-import logo_1 from "@/assets/img/logo/logo.png";
+import logo from "@/assets/img/banner/logo.png";
 
 const Header = () => {
   const { sticky } = UseSticky();
@@ -29,7 +29,7 @@ const Header = () => {
                   <nav className="menu-nav">
                     <div className="logo">
                       <Link href="/">
-                        {/* <Image src={logo_1} alt="Logo" /> */}
+                        <Image src={logo} width="30" height="30" alt="Logo" />
                         <div className="text-xxl">AGRILAND</div>
                       </Link>
                     </div>

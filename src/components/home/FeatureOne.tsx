@@ -1,10 +1,10 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-import featureImg_1 from "@/assets/img/images/features_img01.png";
-import featureImg_2 from "@/assets/img/images/features_img02.png";
-import featureImg_3 from "@/assets/img/images/features_img03.png";
-import featureImg_4 from "@/assets/img/images/features_img04.png";
+import featureImg_1 from "@/assets/img/images/metamask.png";
+import featureImg_2 from "@/assets/img/images/tokens.png";
+import featureImg_3 from "@/assets/img/images/quality.png";
+import featureImg_4 from "@/assets/img/images/tractor2.png";
 
 interface DataType {
   id: number;

@@ -137,9 +137,10 @@ const RoadMapArea = () => {
             </div>
           </div>
         </div>
-        <Slider {...settings} className="row roadMap-active">
+        {/* <Slider {...settings} className="row roadMap-active"> */}
+        <div className="roadmapHolder">
           {roadmap_data.map((item) => (
-            <div key={item.id} className="col-lg-4">
+            <div key={item.id} className="col-lg-3">
               <div className="roadmap-item">
                 <div className="roadmap-content">
                   <h4 className="title">
@@ -151,7 +152,8 @@ const RoadMapArea = () => {
               </div>
             </div>
           ))}
-        </Slider>
+        </div>
+        {/* </Slider> */}
       </div>
     </section>
   );
