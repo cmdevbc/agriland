@@ -19,7 +19,7 @@ const Banner = () => {
                 Grow your Investments,
                 <br /> <span>Seed the Future with Agriland Token</span>
               </h2>
-              <p>Transforming Land Ownership one token at a time.</p>
+              <p>Transforming Land Ownership One Token at a Time</p>
               <div className="banner-countdown-wrap">
                 <div className="coming-time" data-countdown="2024/8/29">
                   <CountdownClock />
