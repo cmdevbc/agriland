@@ -40,8 +40,13 @@ const Banner = () => {
         </a>
       </div>
       <div className="banner-shape-wrap">
-        <Image src={bannerShape_1} alt="" className="leftToRight" />
-        <Image src={bannerShape_2} alt="" className="alltuchtopdown" />
+        <Image src={bannerShape_1} width={239} alt="" className="leftToRight" />
+        <Image
+          src={bannerShape_2}
+          width={239}
+          alt=""
+          className="alltuchtopdown"
+        />
       </div>
     </section>
   );
