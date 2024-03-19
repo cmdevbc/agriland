@@ -13,9 +13,9 @@ import Team from "./Team";
 const Home = () => {
   return (
     <>
-      <Dashboard />
       <Banner />
-      <Contribution />
+      <Dashboard />
+      {/*<Contribution />*/}
       <FeatureOne />
       <RoadMapArea />
     </>
