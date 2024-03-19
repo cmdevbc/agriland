@@ -13,7 +13,7 @@ const doc_data: string[] = [
 
 const DocumentArea = () => {
   return (
-    <section id="contact" className="document-area">
+    <section id="contact" className="document-area pt-140">
       <div className="container">
         <div className="document-inner-wrap">
           <div className="row">
