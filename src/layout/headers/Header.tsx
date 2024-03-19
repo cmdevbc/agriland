@@ -29,7 +29,7 @@ const Header = () => {
                   <nav className="menu-nav">
                     <div className="logo">
                       <Link href="/">
-                        <Image src={logo} width="30" height="30" alt="Logo" />
+                        <Image src={logo} width="45" height="45" alt="Logo" />
                         <div className="text-xxl">AGRILAND</div>
                       </Link>
                     </div>
