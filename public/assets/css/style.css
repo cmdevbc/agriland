@@ -1645,6 +1645,7 @@ label {
 ===============================*/
 .roadmap-area {
     overflow: hidden;
+    display: flex;
 }
 .roadmap-title {
     display: block;
@@ -1660,7 +1661,10 @@ label {
     background: var(--tg-secondary-color);
     border-radius: 15px;
     padding: 75px 50px 65px;
-    min-height:430px;
+    height:100%;
+}
+.roadmap-item {
+    height:100%;
 }
 .roadmap-content .title {
     display: flex;
