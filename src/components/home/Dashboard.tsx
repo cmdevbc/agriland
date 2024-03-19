@@ -38,8 +38,6 @@ const Dashboard = () => {
         </div>
       </div>
       <div className={styles.c2}>
-        <Image src={tractor} alt="" className={styles.tractor} />
-
         <div className={styles.box}>
           <div className={styles.tkns}>
             <div className={classNames(styles.tkn, styles.selectedTkn)}>
@@ -85,12 +83,14 @@ const Dashboard = () => {
             <div className={styles.btn}>View Transaction</div>
             <div className={styles.btn}>Start Again</div>
           </div>
+          <div className={styles.inf}>1 ALT = $1 </div>
+
           <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
             <div>0</div>
           </div>
         </div>
-        <div className={styles.inf}>1 ALT = $1 </div>
+        <Image src={tractor} alt="" className={styles.tractor} />
       </div>
     </section>
   );
