@@ -3,7 +3,7 @@
 import Footer from "@/layout/footer/Footer";
 import "../styles/index.css";
 import Header from "@/layout/headers/Header";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import DocumentArea from "@/components/common/DocumentArea";
 import {
   ThirdwebProvider,
@@ -16,8 +16,8 @@ import {
   localWallet,
 } from "@thirdweb-dev/react";
 
-const body = Outfit({
-  weight: ["100", "200", "300", "400", "500", "700", "800", "900"],
+const inter = Inter({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--tg-body-font-family",
 });
@@ -41,7 +41,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning={true}
-        className={` ${body.variable} ${heading.variable}`}
+        className={` ${inter.variable} ${heading.variable}`}
       >
         <ThirdwebProvider
           supportedWallets={[
