@@ -1660,6 +1660,7 @@ label {
     background: var(--tg-secondary-color);
     border-radius: 15px;
     padding: 75px 50px 65px;
+    min-height:430px;
 }
 .roadmap-content .title {
     display: flex;
