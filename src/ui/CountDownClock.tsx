@@ -1,20 +1,16 @@
-import React from 'react';
-import { useTimer } from 'react-timer-hook';
+import React, { useState } from "react";
+import { useTimer } from "react-timer-hook";
 
-const CountdownClock=()=> {
-  // Set the expiration timestamp based on the current time plus the desired duration
-  const time = new Date();
-  time.setDate(time.getDate() + 302); // 302 days
-  time.setHours(time.getHours() + 2); // 2 hours
-  time.setMinutes(time.getMinutes() + 59); // 59 minutes
-  time.setSeconds(time.getSeconds() + 59); // 59 seconds
+import { useContract, useContractRead } from "@thirdweb-dev/react";
+import abi from "../abi.json";
 
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-  } = useTimer({ expiryTimestamp: time, onExpire: () => console.warn('onExpire called') });
+const CountdownClock = ({ endTimestamp }: { endTimestamp: number }) => {
+  const time = new Date(endTimestamp);
+
+  const { seconds, minutes, hours, days } = useTimer({
+    expiryTimestamp: time,
+    onExpire: () => console.warn("onExpire called"),
+  });
 
   return (
     <>
@@ -32,6 +28,6 @@ const CountdownClock=()=> {
       </div>
     </>
   );
-}
+};
 
 export default CountdownClock;

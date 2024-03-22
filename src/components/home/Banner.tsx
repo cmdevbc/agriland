@@ -5,7 +5,24 @@ import CountdownClock from "@/ui/CountDownClock";
 import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
 
+import { useContract, useContractRead } from "@thirdweb-dev/react";
+import abi from "../../abi.json";
+import { useEffect, useState } from "react";
+
 const Banner = () => {
+  const [endTimestamp, setEndTimestamp] = useState(0);
+  const { contract } = useContract(
+    "0xE63c4e4a5c77d0FA008c08ED64815Bc25F99B7Ea",
+    abi
+  );
+  const { data, isLoading, error } = useContractRead(contract, "getStats");
+
+  useEffect(() => {
+    if (data && data.endTimestamp) {
+      setEndTimestamp(parseInt(data.endTimestamp.toString()) * 1000);
+    }
+  }, [data]);
+
   return (
     <section
       className="banner-area banner-bg"
@@ -21,9 +38,11 @@ const Banner = () => {
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
               <div className="banner-countdown-wrap">
-                <div className="coming-time" data-countdown="2024/8/29">
-                  <CountdownClock />
-                </div>
+                {endTimestamp > 0 && (
+                  <div className="coming-time">
+                    <CountdownClock endTimestamp={endTimestamp} />
+                  </div>
+                )}
               </div>
               <div className="banner-content text-center banner-sub-title">
                 Countdown until Round 1 ends
