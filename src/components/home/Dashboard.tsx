@@ -32,6 +32,8 @@ const Dashboard = () => {
   }
   //////////
   const [selectedTkn, setSelectedTkn] = useState<>("BNB");
+  const [amount, setAmount] = useState<>();
+
   const { data: balance, isLoading } = useBalance();
 
   //////////
@@ -104,7 +106,24 @@ const Dashboard = () => {
           <div className={styles.inp}>
             <div className={styles.f1}>
               <div className={styles.inpb}>
-                <input className={styles.input} />
+                <input
+                  type="text"
+                  lang="en"
+                  value={amount ?? ""}
+                  onChange={(event: any) => {
+                    let inputValue = event.currentTarget.value;
+                    inputValue = inputValue?.replace(/^0+(?=\d)/, "");
+                    inputValue = inputValue?.replace(/^\./, "0.");
+
+                    const [integerPart, decimalPart] = inputValue.split(".");
+                    const l1 = integerPart ? integerPart.length : 0;
+                    const l2 = decimalPart ? decimalPart.length : 0;
+                    if (l1 + l2 <= 6) {
+                      setAmount(inputValue);
+                    }
+                  }}
+                  className={styles.input}
+                />
                 <Image
                   src={
                     selectedTkn == "BNB"
