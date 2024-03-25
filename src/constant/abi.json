@@ -150,6 +150,21 @@
   },
   {
     "type": "function",
+    "name": "getAgriByBNB",
+    "inputs": [
+      { "name": "bnbAmount", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [
+      {
+        "name": "agriTokenAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getClaimableAmount",
     "inputs": [
       { "name": "user", "type": "address", "internalType": "address" }
