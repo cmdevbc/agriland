@@ -1,5 +1,5 @@
 import abi from "@/constant/abi.json";
-import { contractAddress } from "@/constant/address";
+import { contractAddress, usdtContractAddress } from "@/constant/address";
 import {
   toWei,
   useBalance,
@@ -15,7 +15,13 @@ const useBuy = () => {
   const [selectedTkn, setSelectedTkn] = useState("BNB");
   const [amount, setAmount] = useState<any>();
   const [altAmount, setAltAmount] = useState<any>();
-  const { data: balance, isLoading } = useBalance();
+  const { data: balance, isLoading } = useBalance(
+    selectedTkn == "CARD"
+      ? ""
+      : selectedTkn == "USDT"
+      ? usdtContractAddress
+      : undefined
+  );
   let price = "";
   let capital = "";
   ///////////////////
@@ -26,11 +32,11 @@ const useBuy = () => {
   const { data: requiredBnb } = useContractRead(contract, "getRequiredBNB", [
     Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0,
   ]);
-  const { mutateAsync: buyWithBNB, error } = useContractWrite(
+  const { mutateAsync: buyWithBNB } = useContractWrite(contract, "buyWithBNB");
+  const { mutateAsync: buyWithUSDT } = useContractWrite(
     contract,
-    "buyWithBNB"
+    "buyWithUSDT"
   );
-
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
     "getStats"
@@ -81,12 +87,20 @@ const useBuy = () => {
   }, [requiredAgri, selectedTkn, price]);
   //////////
   const onConfirm = async () => {
-    const writeData = await buyWithBNB({
-      args: [toWei(altAmount)],
-      overrides: { value: requiredBnb.toString() },
-    });
-    console.log(amount, altAmount);
-    console.log(writeData);
+    if (Number(altAmount) > 0) {
+      if (selectedTkn == "BNB") {
+        const writeData = await buyWithBNB({
+          args: [toWei(altAmount)],
+          overrides: { value: requiredBnb.toString() },
+        });
+        console.log(writeData);
+      } else if (selectedTkn == "USDT") {
+        const writeData = await buyWithUSDT({
+          args: [toWei(altAmount)],
+        });
+        console.log(writeData);
+      }
+    }
   };
   //////////
   return {
