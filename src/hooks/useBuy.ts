@@ -46,8 +46,11 @@ const useBuy = () => {
     const _price: any = new BigNumber(contractStats.price.toString()).dividedBy(
       10 ** 18
     );
+    const _capital: any = new BigNumber(
+      contractStats.usdCapitalRaised.toString()
+    ).dividedBy(10 ** 18);
     price = _price.toString();
-    capital = contractStats.usdCapitalRaised.toString();
+    capital = _capital.toString();
   }
   ///////////
   //////////

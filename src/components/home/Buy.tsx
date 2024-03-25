@@ -78,8 +78,8 @@ const Buy = () => {
             >
               <Image src={usdt} alt="" className={styles.icon} />
               <div>USDT</div>
-            </div>{" "}
-            <div
+            </div>
+            {/*<div
               onClick={() => setSelectedTkn("CARD")}
               className={classNames(
                 styles.tkn,
@@ -88,11 +88,16 @@ const Buy = () => {
             >
               <Image src={card} alt="" className={styles.icon} />
               <div>Card</div>
-            </div>
+            </div>*/}
           </div>
           <div className={styles.blnc}>
             <Image src={wallet} alt="" className={styles.icon} />
-            <div>Wallet Balance: {balance?.displayValue}</div>
+            <div>
+              Wallet Balance:{" "}
+              {balance?.displayValue
+                ? Number(Number(balance?.displayValue)?.toFixed(4))
+                : ""}
+            </div>
           </div>
           <div className={styles.inp}>
             <div className={styles.f1}>
