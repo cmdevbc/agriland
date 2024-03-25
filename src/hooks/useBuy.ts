@@ -1,5 +1,5 @@
 import abi from "@/constant/abi.json";
-import { contractAddress } from "@/constant/address";
+import { contractAddress, usdtContractAddress } from "@/constant/address";
 import {
   toWei,
   useBalance,
@@ -15,7 +15,13 @@ const useBuy = () => {
   const [selectedTkn, setSelectedTkn] = useState("BNB");
   const [amount, setAmount] = useState<any>();
   const [altAmount, setAltAmount] = useState<any>();
-  const { data: balance, isLoading } = useBalance();
+  const { data: balance, isLoading } = useBalance(
+    selectedTkn == "CARD"
+      ? ""
+      : selectedTkn == "USDT"
+      ? usdtContractAddress
+      : undefined
+  );
   let price = "";
   let capital = "";
   ///////////////////
