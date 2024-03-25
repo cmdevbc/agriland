@@ -82,7 +82,6 @@ const AppLayout = ({ children }: { children: any }) => {
     if (address && chainId && chainId != 97) {
       switchChain(97);
     }
-    console.log(chainId);
   }, [address]);
 
   return <>{children}</>;

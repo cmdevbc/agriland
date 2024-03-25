@@ -31,12 +31,17 @@ const Dashboard = () => {
     capital = "";
   ///////////////////
   const { contract } = useContract(contractAddress, abi);
-  const { data: requiredAltAmount } = useContractRead(
+  const { data: requiredAgri } = useContractRead(contract, "getAgriByBNB", [
+    Number(amount) > 0 ? toWei(Number(amount)) : 0,
+  ]);
+  const { data: requiredBnb } = useContractRead(contract, "getRequiredBNB", [
+    Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0,
+  ]);
+  const { mutateAsync: buyWithBNB, error } = useContractWrite(
     contract,
-    "getRequiredBNB",
-    [Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0]
+    "buyWithBNB"
   );
-  const { mutateAsync: buyWithBNB } = useContractWrite(contract, "buyWithBNB");
+
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
     "getStats"
@@ -52,7 +57,7 @@ const Dashboard = () => {
   /////////
   const onConfirm = async () => {
     const writeData = await buyWithBNB({
-      args: [altAmount],
+      args: [toWei(altAmount)],
     });
     console.log(amount, altAmount);
     console.log(writeData);
@@ -64,9 +69,9 @@ const Dashboard = () => {
   }, [selectedTkn]);
   useEffect(() => {
     if (selectedTkn == "BNB") {
-      if (requiredAltAmount?.toString() && !amount) {
+      if (Number(requiredBnb?.toString()) > 0 && !amount) {
         setAmount(
-          BigNumber(requiredAltAmount.toString())
+          BigNumber(requiredBnb.toString())
             .dividedBy(10 ** 18)
             .toFixed(4)
         );
@@ -76,18 +81,22 @@ const Dashboard = () => {
         setAmount(Number(price) * Number(altAmount));
       }
     }
-  }, [requiredAltAmount, selectedTkn, price]);
+  }, [requiredBnb, selectedTkn, price]);
   useEffect(() => {
     if (selectedTkn == "BNB") {
-      if (amount && !altAmount) {
-        setAltAmount(amount);
+      if (Number(requiredAgri?.toString()) > 0 && !altAmount) {
+        setAltAmount(
+          BigNumber(requiredAgri.toString())
+            .dividedBy(10 ** 18)
+            .toFixed(4)
+        );
       }
     } else {
       if (Number(amount) > 0 && Number(price) > 0 && !altAmount) {
         setAltAmount(Number(amount) / Number(price));
       }
     }
-  }, [amount, selectedTkn, price]);
+  }, [requiredAgri, selectedTkn, price]);
   //////////
   //////////
   return (
@@ -219,7 +228,7 @@ const Dashboard = () => {
               <div className={styles.hi}>$ALT you receive</div>
             </div>
           </div>
-
+          <div></div>
           {status == 0 && (
             <div onClick={onConfirm} className={styles.buy}>
               <Image
