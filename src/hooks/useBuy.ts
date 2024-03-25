@@ -32,11 +32,11 @@ const useBuy = () => {
   const { data: requiredBnb } = useContractRead(contract, "getRequiredBNB", [
     Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0,
   ]);
-  const { mutateAsync: buyWithBNB, error } = useContractWrite(
+  const { mutateAsync: buyWithBNB } = useContractWrite(contract, "buyWithBNB");
+  const { mutateAsync: buyWithUSDT } = useContractWrite(
     contract,
-    "buyWithBNB"
+    "buyWithUSDT"
   );
-
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
     "getStats"
@@ -87,11 +87,19 @@ const useBuy = () => {
   }, [requiredAgri, selectedTkn, price]);
   //////////
   const onConfirm = async () => {
-    const writeData = await buyWithBNB({
-      args: [toWei(altAmount)],
-    });
-    console.log(amount, altAmount);
-    console.log(writeData);
+    if (Number(altAmount) > 0) {
+      if (selectedTkn == "BNB") {
+        const writeData = await buyWithBNB({
+          args: [toWei(altAmount)],
+        });
+        console.log(writeData);
+      } else if (selectedTkn == "USDT") {
+        const writeData = await buyWithUSDT({
+          args: [toWei(altAmount)],
+        });
+        console.log(writeData);
+      }
+    }
   };
   //////////
   return {
