@@ -83,6 +83,7 @@ const useBuy = () => {
   const onConfirm = async () => {
     const writeData = await buyWithBNB({
       args: [toWei(altAmount)],
+      overrides: { value: requiredBnb.toString() },
     });
     console.log(amount, altAmount);
     console.log(writeData);
