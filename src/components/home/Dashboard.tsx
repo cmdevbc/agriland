@@ -9,10 +9,11 @@ import usdt from "@/assets/img/images/usdt.svg";
 import card from "@/assets/img/images/card.png";
 import wallet from "@/assets/img/images/wallet.png";
 import alt from "@/assets/img/images/alt.png";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
+import { useBalance, useContract, useContractRead } from "@thirdweb-dev/react";
 import abi from "@/constant/abi.json";
 import { contractAddress } from "@/constant/address";
 import BigNumber from "bignumber.js";
+import { useState } from "react";
 
 const Dashboard = () => {
   let price,
@@ -29,6 +30,11 @@ const Dashboard = () => {
     price = _price.toString();
     capital = contractStats.usdCapitalRaised.toString();
   }
+  //////////
+  const [selectedTkn, setSelectedTkn] = useState<>("BNB");
+  const { data: balance, isLoading } = useBalance();
+
+  //////////
   return (
     <section className={styles.dashboard}>
       <div className={styles.c1}>
@@ -60,28 +66,56 @@ const Dashboard = () => {
       <div className={styles.c2}>
         <div className={styles.box}>
           <div className={styles.tkns}>
-            <div className={classNames(styles.tkn, styles.selectedTkn)}>
+            <div
+              onClick={() => setSelectedTkn("BNB")}
+              className={classNames(
+                styles.tkn,
+                selectedTkn == "BNB" && styles.selectedTkn
+              )}
+            >
               <Image src={bnb} alt="" className={styles.icon} />
               <div>BNB</div>
             </div>
-            <div className={classNames(styles.tkn)}>
+            <div
+              onClick={() => setSelectedTkn("USDT")}
+              className={classNames(
+                styles.tkn,
+                selectedTkn == "USDT" && styles.selectedTkn
+              )}
+            >
               <Image src={usdt} alt="" className={styles.icon} />
               <div>USDT</div>
             </div>{" "}
-            <div className={classNames(styles.tkn)}>
+            <div
+              onClick={() => setSelectedTkn("CARD")}
+              className={classNames(
+                styles.tkn,
+                selectedTkn == "CARD" && styles.selectedTkn
+              )}
+            >
               <Image src={card} alt="" className={styles.icon} />
               <div>Card</div>
             </div>
           </div>
           <div className={styles.blnc}>
             <Image src={wallet} alt="" className={styles.icon} />
-            <div>Wallet Balance: 0</div>
+            <div>Wallet Balance: {balance?.displayValue}</div>
           </div>
           <div className={styles.inp}>
             <div className={styles.f1}>
               <div className={styles.inpb}>
                 <input className={styles.input} />
-                <Image src={bnb} alt="" className={styles.icon} />
+                <Image
+                  src={
+                    selectedTkn == "BNB"
+                      ? bnb
+                      : selectedTkn == "USDT"
+                      ? usdt
+                      : wallet
+                  }
+                  alt=""
+                  className={styles.icon}
+                />
                 <div className={styles.max}>Max</div>
               </div>
               <div className={styles.hi}>BNB to pay</div>

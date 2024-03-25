@@ -14,7 +14,11 @@ import {
   trustWallet,
   phantomWallet,
   localWallet,
+  useAddress,
+  useChainId,
+  useSwitchChain,
 } from "@thirdweb-dev/react";
+import { useEffect } from "react";
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -61,7 +65,7 @@ export default function RootLayout({
           clientId="57295e55d254d258cee1bb8de9c59bcf"
         >
           <Header />
-          {children}
+          <AppLayout> {children}</AppLayout>
           <DocumentArea />
           <Footer />
         </ThirdwebProvider>
@@ -69,3 +73,17 @@ export default function RootLayout({
     </html>
   );
 }
+
+const AppLayout = ({ children }: { children: any }) => {
+  const address = useAddress();
+  const chainId = useChainId();
+  const switchChain = useSwitchChain();
+  useEffect(() => {
+    if (address && chainId && chainId != 97) {
+      switchChain(97);
+    }
+    console.log(chainId);
+  }, [address]);
+
+  return <>{children}</>;
+};

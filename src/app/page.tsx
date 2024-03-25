@@ -1,5 +1,6 @@
 import Home from "@/components/home";
 import Wrapper from "@/layout/Wrapper";
+import { useEffect } from "react";
 
 export const metadata = {
   title: "Agriland",
