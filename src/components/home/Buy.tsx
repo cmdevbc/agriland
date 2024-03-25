@@ -11,7 +11,7 @@ import Image from "next/image";
 import styles from "./Dashboard.module.css";
 import useBuy from "./useBuy";
 
-const Dashboard = () => {
+const Buy = () => {
   //////////
   const {
     balance,
@@ -211,4 +211,4 @@ const Dashboard = () => {
     </section>
   );
 };
-export default Dashboard;
+export default Buy;
