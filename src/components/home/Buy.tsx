@@ -9,7 +9,7 @@ import wallet from "@/assets/img/images/wallet.png";
 import classNames from "classnames";
 import Image from "next/image";
 import styles from "./Buy.module.css";
-import useBuy from "./useBuy";
+import useBuy from "../../hooks/useBuy";
 
 const Buy = () => {
   //////////
