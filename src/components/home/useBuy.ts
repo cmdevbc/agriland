@@ -100,6 +100,7 @@ const useBuy = () => {
     setAltAmount,
     status,
     setStatus,
+    onConfirm,
   };
 };
 export default useBuy;
