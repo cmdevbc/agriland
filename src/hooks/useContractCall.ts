@@ -10,7 +10,7 @@ import BigNumber from "bignumber.js";
 
 const useContractCall = () => {
   const { contract } = useContract(
-    "0xE63c4e4a5c77d0FA008c08ED64815Bc25F99B7Ea",
+    "0x92ED6f8606f942D2C53cD8f995e4ce418D51b36B",
     abi
   );
 
