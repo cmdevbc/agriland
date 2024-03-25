@@ -1,103 +1,32 @@
 // @ts-nocheck
 "use client";
+import alt from "@/assets/img/images/alt.png";
+import bnb from "@/assets/img/images/bnb.png";
+import card from "@/assets/img/images/card.png";
+import tractor from "@/assets/img/images/tractor2.png";
+import usdt from "@/assets/img/images/usdt.svg";
+import wallet from "@/assets/img/images/wallet.png";
+import classNames from "classnames";
 import Image from "next/image";
 import styles from "./Dashboard.module.css";
-import tractor from "@/assets/img/images/tractor2.png";
-import classNames from "classnames";
-import bnb from "@/assets/img/images/bnb.png";
-import usdt from "@/assets/img/images/usdt.svg";
-import card from "@/assets/img/images/card.png";
-import wallet from "@/assets/img/images/wallet.png";
-import alt from "@/assets/img/images/alt.png";
-import {
-  toWei,
-  useBalance,
-  useContract,
-  useContractRead,
-  useContractWrite,
-} from "@thirdweb-dev/react";
-import abi from "@/constant/abi.json";
-import { contractAddress } from "@/constant/address";
-import BigNumber from "bignumber.js";
-import { useEffect, useState } from "react";
+import useBuy from "./useBuy";
 
 const Dashboard = () => {
-  const [status, setStatus] = useState<>(0);
-  const [selectedTkn, setSelectedTkn] = useState<>("BNB");
-  const [amount, setAmount] = useState<>();
-  const [altAmount, setAltAmount] = useState<>();
-  const { data: balance, isLoading } = useBalance();
-  let price,
-    capital = "";
-  ///////////////////
-  const { contract } = useContract(contractAddress, abi);
-  const { data: requiredAgri } = useContractRead(contract, "getAgriByBNB", [
-    Number(amount) > 0 ? toWei(Number(amount)) : 0,
-  ]);
-  const { data: requiredBnb } = useContractRead(contract, "getRequiredBNB", [
-    Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0,
-  ]);
-  const { mutateAsync: buyWithBNB, error } = useContractWrite(
-    contract,
-    "buyWithBNB"
-  );
-
-  const { data: contractStats, isSuccess } = useContractRead(
-    contract,
-    "getStats"
-  );
-  ///////////
-  if (isSuccess && contractStats) {
-    const _price: any = new BigNumber(contractStats.price.toString()).dividedBy(
-      10 ** 18
-    );
-    price = _price.toString();
-    capital = contractStats.usdCapitalRaised.toString();
-  }
-  /////////
-  const onConfirm = async () => {
-    const writeData = await buyWithBNB({
-      args: [toWei(altAmount)],
-    });
-    console.log(amount, altAmount);
-    console.log(writeData);
-  };
   //////////
-  useEffect(() => {
-    setAltAmount(null);
-    setAmount(null);
-  }, [selectedTkn]);
-  useEffect(() => {
-    if (selectedTkn == "BNB") {
-      if (Number(requiredBnb?.toString()) > 0 && !amount) {
-        setAmount(
-          BigNumber(requiredBnb.toString())
-            .dividedBy(10 ** 18)
-            .toFixed(4)
-        );
-      }
-    } else {
-      if (Number(price) > 0 && !amount) {
-        setAmount(Number(price) * Number(altAmount));
-      }
-    }
-  }, [requiredBnb, selectedTkn, price]);
-  useEffect(() => {
-    if (selectedTkn == "BNB") {
-      if (Number(requiredAgri?.toString()) > 0 && !altAmount) {
-        setAltAmount(
-          BigNumber(requiredAgri.toString())
-            .dividedBy(10 ** 18)
-            .toFixed(4)
-        );
-      }
-    } else {
-      if (Number(amount) > 0 && Number(price) > 0 && !altAmount) {
-        setAltAmount(Number(amount) / Number(price));
-      }
-    }
-  }, [requiredAgri, selectedTkn, price]);
-  //////////
+  const {
+    balance,
+    selectedTkn,
+    setSelectedTkn,
+    amount,
+    setAmount,
+    altAmount,
+    setAltAmount,
+    status,
+    setStatus,
+    price,
+    capital,
+    onConfirm,
+  } = useBuy();
   //////////
   return (
     <section className={styles.dashboard}>
