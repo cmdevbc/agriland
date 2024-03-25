@@ -80,6 +80,14 @@ const useBuy = () => {
     }
   }, [requiredAgri, selectedTkn, price]);
   //////////
+  const onConfirm = async () => {
+    const writeData = await buyWithBNB({
+      args: [toWei(altAmount)],
+    });
+    console.log(amount, altAmount);
+    console.log(writeData);
+  };
+  //////////
   return {
     balance,
     price,

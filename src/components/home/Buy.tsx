@@ -8,7 +8,7 @@ import usdt from "@/assets/img/images/usdt.svg";
 import wallet from "@/assets/img/images/wallet.png";
 import classNames from "classnames";
 import Image from "next/image";
-import styles from "./Dashboard.module.css";
+import styles from "./Buy.module.css";
 import useBuy from "./useBuy";
 
 const Buy = () => {
