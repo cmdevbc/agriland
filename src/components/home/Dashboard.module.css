@@ -124,6 +124,15 @@
   font-weight: 700;
   margin-top: 3px;
 }
+.cpnt {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
 .pc {
   color: #fff;
   font-size: 12px;
@@ -213,6 +222,23 @@
   font-size: 12px;
   font-weight: 600;
 }
+.buy {
+  width: 192px;
+  height: 42px;
+  border-radius: 5px;
+  border: 1px solid #35855b;
+  background: #1c1d34;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-top: 70px;
+}
+
 @media only screen and (max-width: 1400px) and (min-width: 800px) {
   .tractor {
     position: absolute;

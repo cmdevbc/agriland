@@ -9,20 +9,39 @@ import usdt from "@/assets/img/images/usdt.svg";
 import card from "@/assets/img/images/card.png";
 import wallet from "@/assets/img/images/wallet.png";
 import alt from "@/assets/img/images/alt.png";
-import { useBalance, useContract, useContractRead } from "@thirdweb-dev/react";
+import {
+  toWei,
+  useBalance,
+  useContract,
+  useContractRead,
+  useContractWrite,
+} from "@thirdweb-dev/react";
 import abi from "@/constant/abi.json";
 import { contractAddress } from "@/constant/address";
 import BigNumber from "bignumber.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+  const [status, setStatus] = useState<>(0);
+  const [selectedTkn, setSelectedTkn] = useState<>("BNB");
+  const [amount, setAmount] = useState<>();
+  const [altAmount, setAltAmount] = useState<>();
+  const { data: balance, isLoading } = useBalance();
   let price,
     capital = "";
+  ///////////////////
   const { contract } = useContract(contractAddress, abi);
+  const { data: requiredAltAmount } = useContractRead(
+    contract,
+    "getRequiredBNB",
+    [Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0]
+  );
+  const { mutateAsync: buyWithBNB } = useContractWrite(contract, "buyWithBNB");
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
     "getStats"
   );
+  ///////////
   if (isSuccess && contractStats) {
     const _price: any = new BigNumber(contractStats.price.toString()).dividedBy(
       10 ** 18
@@ -30,12 +49,46 @@ const Dashboard = () => {
     price = _price.toString();
     capital = contractStats.usdCapitalRaised.toString();
   }
+  /////////
+  const onConfirm = async () => {
+    const writeData = await buyWithBNB({
+      args: [altAmount],
+    });
+    console.log(amount, altAmount);
+    console.log(writeData);
+  };
   //////////
-  const [selectedTkn, setSelectedTkn] = useState<>("BNB");
-  const [amount, setAmount] = useState<>();
-
-  const { data: balance, isLoading } = useBalance();
-
+  useEffect(() => {
+    setAltAmount(null);
+    setAmount(null);
+  }, [selectedTkn]);
+  useEffect(() => {
+    if (selectedTkn == "BNB") {
+      if (requiredAltAmount?.toString() && !amount) {
+        setAmount(
+          BigNumber(requiredAltAmount.toString())
+            .dividedBy(10 ** 18)
+            .toFixed(4)
+        );
+      }
+    } else {
+      if (Number(price) > 0 && !amount) {
+        setAmount(Number(price) * Number(altAmount));
+      }
+    }
+  }, [requiredAltAmount, selectedTkn, price]);
+  useEffect(() => {
+    if (selectedTkn == "BNB") {
+      if (amount && !altAmount) {
+        setAltAmount(amount);
+      }
+    } else {
+      if (Number(amount) > 0 && Number(price) > 0 && !altAmount) {
+        setAltAmount(Number(amount) / Number(price));
+      }
+    }
+  }, [amount, selectedTkn, price]);
+  //////////
   //////////
   return (
     <section className={styles.dashboard}>
@@ -120,6 +173,7 @@ const Dashboard = () => {
                     const l2 = decimalPart ? decimalPart.length : 0;
                     if (l1 + l2 <= 6) {
                       setAmount(inputValue);
+                      setAltAmount(null);
                     }
                   }}
                   className={styles.input}
@@ -141,21 +195,72 @@ const Dashboard = () => {
             </div>
             <div className={styles.f1}>
               <div className={styles.inpb}>
-                <input className={styles.input} />
+                <input
+                  type="text"
+                  lang="en"
+                  value={altAmount ?? ""}
+                  onChange={(event: any) => {
+                    let inputValue = event.currentTarget.value;
+                    inputValue = inputValue?.replace(/^0+(?=\d)/, "");
+                    inputValue = inputValue?.replace(/^\./, "0.");
+
+                    const [integerPart, decimalPart] = inputValue.split(".");
+                    const l1 = integerPart ? integerPart.length : 0;
+                    const l2 = decimalPart ? decimalPart.length : 0;
+                    if (l1 + l2 <= 6) {
+                      setAltAmount(inputValue);
+                      setAmount(null);
+                    }
+                  }}
+                  className={styles.input}
+                />
                 <Image src={alt} alt="" className={styles.icon} />
               </div>
               <div className={styles.hi}>$ALT you receive</div>
             </div>
           </div>
-          <Image src={tractor} alt="" className={styles.fail} />
-          <div className={styles.pf}>PURCHASE FAILED!</div>
-          <div className={styles.pc}>
-            Please click on the View Transaction button for more details.
-          </div>
-          <div className={styles.btns}>
-            <div className={styles.btn}>View Transaction</div>
-            <div className={styles.btn}>Start Again</div>
-          </div>
+
+          {status == 0 && (
+            <div onClick={onConfirm} className={styles.buy}>
+              <Image
+                src={
+                  selectedTkn == "BNB"
+                    ? bnb
+                    : selectedTkn == "USDT"
+                    ? usdt
+                    : wallet
+                }
+                alt=""
+                className={styles.icon}
+              />
+              <span>Buy with {selectedTkn}</span>
+            </div>
+          )}
+          {status == 13 && (
+            <Image src={tractor} alt="" className={styles.fail} />
+          )}
+
+          {status == 13 && (
+            <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
+          )}
+          {status == 13 && (
+            <div className={styles.pc}>
+              In order to buy $ALT with BNB, please confirm the transaction in
+              your wallet. You may need to check the wallet app if you’re on
+              mobile
+            </div>
+          )}
+          {status == 13 && (
+            <div className={styles.pc}>
+              Please click on the View Transaction button for more details.
+            </div>
+          )}
+          {status == 13 && (
+            <div className={styles.btns}>
+              <div className={styles.btn}>View Transaction</div>
+              <div className={styles.btn}>Start Again</div>
+            </div>
+          )}
           <div className={styles.inf}>1 ALT = ${price} </div>
 
           <div className={styles.lr}>
