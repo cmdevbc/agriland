@@ -6,6 +6,7 @@ import card from "@/assets/img/images/card.png";
 import tractor from "@/assets/img/images/tractor2.png";
 import usdt from "@/assets/img/images/usdt.svg";
 import wallet from "@/assets/img/images/wallet.png";
+import loading from "@/assets/img/images/loading.gif";
 import classNames from "classnames";
 import Image from "next/image";
 import styles from "./Buy.module.css";
@@ -26,6 +27,11 @@ const Buy = () => {
     price,
     capital,
     onConfirm,
+    onApprove,
+    isApproved,
+    isLoadingApprove,
+    isLoadingBuyWithUSDT,
+    isLoadingBuyWithBNB,
   } = useBuy();
   //////////
   return (
@@ -162,22 +168,34 @@ const Buy = () => {
               <div className={styles.hi}>$ALT you receive</div>
             </div>
           </div>
-          <div></div>
+
           {status == 0 && (
-            <div onClick={onConfirm} className={styles.buy}>
-              <Image
-                src={
-                  selectedTkn == "BNB"
-                    ? bnb
-                    : selectedTkn == "USDT"
-                    ? usdt
-                    : wallet
-                }
-                alt=""
-                className={styles.icon}
-              />
-              <span>Buy with {selectedTkn}</span>
-            </div>
+            <>
+              {selectedTkn == "USDT" && isApproved == false ? (
+                <div onClick={onApprove} className={styles.buy}>
+                  <span>Approve</span>
+                  {isLoadingApprove && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              ) : selectedTkn == "USDT" ? (
+                <div onClick={onConfirm} className={styles.buy}>
+                  <Image src={usdt} alt="" className={styles.icon} />
+                  <span>Buy with USDT</span>
+                  {isLoadingBuyWithUSDT && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              ) : (
+                <div onClick={onConfirm} className={styles.buy}>
+                  <Image src={bnb} alt="" className={styles.icon} />
+                  <span>Buy with BNB</span>
+                  {isLoadingBuyWithBNB && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              )}
+            </>
           )}
           {status == 13 && (
             <Image src={tractor} alt="" className={styles.fail} />
