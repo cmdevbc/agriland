@@ -1,27 +1,22 @@
 "use client";
-import Image from "next/image";
 import CountdownClock from "@/ui/CountDownClock";
-
+import Image from "next/image";
 import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
-
 import { useContract, useContractRead } from "@thirdweb-dev/react";
-import abi from "../../abi.json";
-import { useEffect, useState } from "react";
+import abi from "@/constant/abi.json";
+import { contractAddress } from "@/constant/address";
 
 const Banner = () => {
-  const [endTimestamp, setEndTimestamp] = useState(0);
-  const { contract } = useContract(
-    "0xE63c4e4a5c77d0FA008c08ED64815Bc25F99B7Ea",
-    abi
+  const { contract } = useContract(contractAddress, abi);
+  const { data: contractStats, isSuccess } = useContractRead(
+    contract,
+    "getStats"
   );
-  const { data, isLoading, error } = useContractRead(contract, "getStats");
-
-  useEffect(() => {
-    if (data && data.endTimestamp) {
-      setEndTimestamp(parseInt(data.endTimestamp.toString()) * 1000);
-    }
-  }, [data]);
+  const endTimestamp =
+    isSuccess && contractStats && contractStats.endTimestamp
+      ? parseInt(contractStats.endTimestamp.toString()) * 1000
+      : 0;
 
   return (
     <section

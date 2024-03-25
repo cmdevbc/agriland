@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useTimer } from "react-timer-hook";
 
-import { useContract, useContractRead } from "@thirdweb-dev/react";
-import abi from "../abi.json";
-
 const CountdownClock = ({ endTimestamp }: { endTimestamp: number }) => {
   const time = new Date(endTimestamp);
 
