@@ -68,13 +68,18 @@ const useBuy = () => {
     contract,
     "getStats"
   );
+  const { data: totalAgriPool } = useContractRead(
+    contract,
+    "totalAgriPool",
+    []
+  );
   ///////////
-  if (contractStats?.totalAmount && contractStats?.amountSold) {
-    const n1 = new BigNumber(contractStats.totalAmount.toString());
+  if (contractStats?.totalPool && contractStats?.amountSold) {
+    const n1 = new BigNumber(contractStats.totalPool.toString());
     const n2 = new BigNumber(contractStats.amountSold.toString());
     progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
   }
-
+  console.log(totalAgriPool);
   if (allowance?.toString()) {
     isApproved = new BigNumber(allowance.toString()).comparedTo(0) > 0;
   }
