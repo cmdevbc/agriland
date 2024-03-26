@@ -28,6 +28,7 @@ const useBuy = () => {
     selectedTkn == "USDT" ? usdtContractAddress : undefined
   );
   let price = "";
+  let progress = 0;
   let capital = "";
   let isApproved = undefined;
   let userTotalBoughtAgri = "";
@@ -68,6 +69,12 @@ const useBuy = () => {
     "getStats"
   );
   ///////////
+  if (contractStats?.totalAmount && contractStats?.amountSold) {
+    const n1 = new BigNumber(contractStats.totalAmount.toString());
+    const n2 = new BigNumber(contractStats.amountSold.toString());
+    progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
+  }
+
   if (allowance?.toString()) {
     isApproved = new BigNumber(allowance.toString()).comparedTo(0) > 0;
   }
@@ -217,6 +224,7 @@ const useBuy = () => {
     status,
     setStatus,
     addToken,
+    progress,
   };
 };
 export default useBuy;

@@ -37,6 +37,7 @@ const Buy = () => {
     status,
     setStatus,
     addToken,
+    progress,
   } = useBuy();
   //////////
 
@@ -61,7 +62,7 @@ const Buy = () => {
             </div>
           </div>
           <div className={styles.progress}>
-            <div className={styles.bar} style={{ width: "60%" }} />
+            <div className={styles.bar} style={{ width: progress + "%" }} />
           </div>
           <div className={styles.rp2}>
             <div>Buy Now Before Price Rise</div>
