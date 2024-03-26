@@ -175,13 +175,24 @@
   font-size: 14px;
   font-weight: 600;
 }
-.inf {
+.infs {
   margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inf {
   color: #fff;
   font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
   text-align: left;
+}
+.add {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+  cursor: pointer;
 }
 .rp {
   width: 90%;

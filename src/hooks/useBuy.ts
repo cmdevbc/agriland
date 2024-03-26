@@ -1,7 +1,11 @@
 import abi from "@/constant/abi.json";
 import erc20Abi from "@/constant/erc20.json";
 
-import { contractAddress, usdtContractAddress } from "@/constant/constant";
+import {
+  contractAddress,
+  token,
+  usdtContractAddress,
+} from "@/constant/constant";
 import {
   toWei,
   useAddress,
@@ -157,6 +161,22 @@ const useBuy = () => {
     } catch (error) {}
   };
   //////////
+  const addToken = async () => {
+    console.log(111);
+    await window.ethereum.request({
+      method: "wallet_watchAsset",
+      params: {
+        type: "ERC20",
+        options: {
+          address: token.address,
+          symbol: token.symbol,
+          decimals: 18,
+          image: "https://foo.io/token-image.svg",
+        },
+      },
+    });
+  };
+  //////////
   useEffect(() => {
     if (isLoadingBuyWithUSDT || isLoadingBuyWithBNB) {
       setStatus(1);
@@ -196,6 +216,7 @@ const useBuy = () => {
     isSuccessBuyWithUSDT,
     status,
     setStatus,
+    addToken,
   };
 };
 export default useBuy;

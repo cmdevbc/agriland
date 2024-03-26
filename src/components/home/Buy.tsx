@@ -36,6 +36,7 @@ const Buy = () => {
     transactionHash,
     status,
     setStatus,
+    addToken,
   } = useBuy();
   //////////
 
@@ -250,7 +251,12 @@ const Buy = () => {
               )}
             </>
           )}
-          <div className={styles.inf}>1 ALT = ${price} </div>
+          <div className={styles.infs}>
+            <div className={styles.inf}>1 ALT = ${price} </div>
+            <div className={styles.add} onClick={addToken}>
+              Add $ALT to Wallet
+            </div>
+          </div>
           <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
             <div>{userTotalBoughtAgri}</div>
