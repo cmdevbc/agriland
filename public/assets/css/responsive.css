@@ -689,3 +689,8 @@
     padding: 50px 30px 60px;
   }
 }
+@media only screen and (max-width: 450px) {
+  .roadmapHolder {
+    display: unset;
+  }
+}
