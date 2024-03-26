@@ -40,7 +40,7 @@ const Buy = () => {
 
   //////////
   return (
-    <section className={styles.dashboard}>
+    <section className={styles.dashboard} id="buy">
       <div className={styles.c1}>
         <div>
           <span className={styles.t1}>{capital}</span>
