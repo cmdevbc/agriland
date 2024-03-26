@@ -2,8 +2,8 @@
 "use client";
 import alt from "@/assets/img/images/alt.png";
 import bnb from "@/assets/img/images/bnb.png";
-import card from "@/assets/img/images/card.png";
 import tractor from "@/assets/img/images/tractor2.png";
+import tick from "@/assets/img/images/tick.png";
 import usdt from "@/assets/img/images/usdt.svg";
 import wallet from "@/assets/img/images/wallet.png";
 import loading from "@/assets/img/images/loading.gif";
@@ -11,6 +11,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import styles from "./Buy.module.css";
 import useBuy from "../../hooks/useBuy";
+import { blockExplorer } from "@/constant/constant";
 
 const Buy = () => {
   //////////
@@ -31,11 +32,17 @@ const Buy = () => {
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
     userTotalBoughtAgri,
+    isSuccessBuyWithBNB,
+    isSuccessBuyWithUSDT,
+    transactionHash,
+    setTransactionHash,
   } = useBuy();
   //////////
   let status = 0;
   if (isLoadingBuyWithUSDT || isLoadingBuyWithBNB) {
     status = 1;
+  } else if ((isSuccessBuyWithBNB || isSuccessBuyWithUSDT) && transactionHash) {
+    status = 2;
   }
   //////////
   return (
@@ -89,16 +96,6 @@ const Buy = () => {
               <Image src={usdt} alt="" className={styles.icon} />
               <div>USDT</div>
             </div>
-            {/*<div
-              onClick={() => setSelectedTkn("CARD")}
-              className={classNames(
-                styles.tkn,
-                selectedTkn == "CARD" && styles.selectedTkn
-              )}
-            >
-              <Image src={card} alt="" className={styles.icon} />
-              <div>Card</div>
-            </div>*/}
           </div>
           <div className={styles.blnc}>
             <Image src={wallet} alt="" className={styles.icon} />
@@ -204,6 +201,7 @@ const Buy = () => {
           {status == 1 && (
             <>
               <Image src={tractor} alt="" className={styles.fail} />
+              <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
               <div className={styles.pc}>
                 In order to buy {altAmount} Agri with {selectedTkn}, please
                 confirm the transaction in your wallet. You may need to check
@@ -211,24 +209,34 @@ const Buy = () => {
               </div>
             </>
           )}
-
-          {status == 13 && (
-            <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
-          )}
-
-          {status == 13 && (
-            <div className={styles.pc}>
-              Please click on the View Transaction button for more details.
-            </div>
-          )}
-          {status == 13 && (
-            <div className={styles.btns}>
-              <div className={styles.btn}>View Transaction</div>
-              <div className={styles.btn}>Start Again</div>
-            </div>
+          {status == 2 && (
+            <>
+              <Image src={tick} alt="" className={styles.success} />
+              <div className={classNames(styles.pf, styles.cpnt)}>
+                PURCHASE SUCCESS!
+              </div>
+              <div className={styles.pc}>
+                Please click on the View Transaction button for more details.
+              </div>
+              <div className={styles.btns}>
+                <div
+                  onClick={() =>
+                    window.open(blockExplorer + transactionHash, "_blank")
+                  }
+                  className={styles.btn}
+                >
+                  View Transaction
+                </div>
+                <div
+                  onClick={() => setTransactionHash(null)}
+                  className={styles.btn}
+                >
+                  Start Again
+                </div>
+              </div>
+            </>
           )}
           <div className={styles.inf}>1 ALT = ${price} </div>
-
           <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
             <div>{userTotalBoughtAgri}</div>

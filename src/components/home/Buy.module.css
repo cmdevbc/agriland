@@ -118,6 +118,11 @@
   margin-top: 13px;
   transform: rotate(50.655deg);
 }
+.success {
+  width: 20px;
+  height: 20px;
+  margin-top: 13px;
+}
 .pf {
   color: #44a08d;
   font-size: 12px;
@@ -125,7 +130,6 @@
   margin-top: 3px;
 }
 .cpnt {
-  cursor: pointer;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -136,7 +140,7 @@
 .pc {
   color: #fff;
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .btns {
   display: flex;

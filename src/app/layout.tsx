@@ -5,6 +5,7 @@ import "../styles/index.css";
 import Header from "@/layout/headers/Header";
 import { Outfit, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import DocumentArea from "@/components/common/DocumentArea";
+import { chainId as _chainId } from "@/constant/constant";
 import {
   ThirdwebProvider,
   metamaskWallet,
@@ -79,8 +80,8 @@ const AppLayout = ({ children }: { children: any }) => {
   const chainId = useChainId();
   const switchChain = useSwitchChain();
   useEffect(() => {
-    if (address && chainId && chainId != 97) {
-      switchChain(97);
+    if (address && chainId && chainId != _chainId) {
+      switchChain(_chainId);
     }
   }, [address]);
 

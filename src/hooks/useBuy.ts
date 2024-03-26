@@ -1,7 +1,7 @@
 import abi from "@/constant/abi.json";
 import erc20Abi from "@/constant/erc20.json";
 
-import { contractAddress, usdtContractAddress } from "@/constant/address";
+import { contractAddress, usdtContractAddress } from "@/constant/constant";
 import {
   toWei,
   useAddress,
@@ -16,14 +16,11 @@ import { useEffect, useState } from "react";
 const useBuy = () => {
   const address = useAddress();
   const [selectedTkn, setSelectedTkn] = useState("BNB");
+  const [transactionHash, setTransactionHash] = useState<any>();
   const [amount, setAmount] = useState<any>();
   const [altAmount, setAltAmount] = useState<any>();
-  const { data: balance, isLoading } = useBalance(
-    selectedTkn == "CARD"
-      ? ""
-      : selectedTkn == "USDT"
-      ? usdtContractAddress
-      : undefined
+  const { data: balance } = useBalance(
+    selectedTkn == "USDT" ? usdtContractAddress : undefined
   );
   let price = "";
   let capital = "";
@@ -35,7 +32,7 @@ const useBuy = () => {
   ////////
   const {
     data: _userTotalBoughtAgri,
-    isSuccess: userTotalBoughtAgriIsSuccess,
+    isSuccess: isSuccessUserTotalBoughtAgri,
   } = useContractRead(contract, "userTotalBoughtAgri", [address]);
   const { data: requiredAgri } = useContractRead(contract, "getAgriByBNB", [
     Number(amount) > 0 ? toWei(Number(amount)) : 0,
@@ -53,10 +50,16 @@ const useBuy = () => {
     address,
     contractAddress,
   ]);
-  const { mutateAsync: buyWithBNB, isLoading: isLoadingBuyWithBNB } =
-    useContractWrite(contract, "buyWithBNB");
-  const { mutateAsync: buyWithUSDT, isLoading: isLoadingBuyWithUSDT } =
-    useContractWrite(contract, "buyWithUSDT");
+  const {
+    mutateAsync: buyWithBNB,
+    isLoading: isLoadingBuyWithBNB,
+    isSuccess: isSuccessBuyWithBNB,
+  } = useContractWrite(contract, "buyWithBNB");
+  const {
+    mutateAsync: buyWithUSDT,
+    isLoading: isLoadingBuyWithUSDT,
+    isSuccess: isSuccessBuyWithUSDT,
+  } = useContractWrite(contract, "buyWithUSDT");
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
     "getStats"
@@ -66,7 +69,7 @@ const useBuy = () => {
     isApproved = new BigNumber(allowance.toString()).comparedTo(0) > 0;
   }
   ///////////
-  if (_userTotalBoughtAgri && userTotalBoughtAgriIsSuccess) {
+  if (_userTotalBoughtAgri && isSuccessUserTotalBoughtAgri) {
     userTotalBoughtAgri = Number(
       new BigNumber(_userTotalBoughtAgri.toString())
         .dividedBy(10 ** 18)
@@ -139,11 +142,17 @@ const useBuy = () => {
             args: [toWei(altAmount)],
             overrides: { value: requiredBnb.toString() },
           });
+          if (writeData?.receipt?.transactionHash) {
+            setTransactionHash(writeData?.receipt?.transactionHash);
+          }
         } else if (selectedTkn == "USDT") {
           if (isLoadingBuyWithUSDT) return;
           const writeData = await buyWithUSDT({
             args: [toWei(altAmount)],
           });
+          if (writeData?.receipt?.transactionHash) {
+            setTransactionHash(writeData?.receipt?.transactionHash);
+          }
         }
       }
     } catch (error) {}
@@ -166,6 +175,10 @@ const useBuy = () => {
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
     userTotalBoughtAgri,
+    transactionHash,
+    setTransactionHash,
+    isSuccessBuyWithBNB,
+    isSuccessBuyWithUSDT,
   };
 };
 export default useBuy;
