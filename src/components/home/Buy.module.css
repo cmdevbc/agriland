@@ -313,12 +313,14 @@
   }
   .c1 {
     width: 100%;
+    margin-top: 30px;
   }
   .c2 {
     width: 100%;
   }
   .box {
     width: 100%;
+    left: unset;
   }
   .rp {
     width: 100%;

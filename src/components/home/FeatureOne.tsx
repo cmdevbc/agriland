@@ -87,7 +87,7 @@ const FeatureOne = () => {
                   <p>{item.desc}</p>
                 </div>
                 <div className="features-img">
-                  <Image width="164" src={item.img} alt="" />
+                  <Image className="features-img-1" src={item.img} alt="" />
                 </div>
               </div>
             </div>

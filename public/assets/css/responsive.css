@@ -429,6 +429,10 @@
     text-align: center;
     margin-bottom: 30px;
   }
+  .features-img-1 {
+    width: 75px;
+    height: auto;
+  }
   .features-bg {
     left: 0;
     right: 0;
