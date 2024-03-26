@@ -12,6 +12,7 @@ import Image from "next/image";
 import styles from "./Buy.module.css";
 import useBuy from "../../hooks/useBuy";
 import { blockExplorer } from "@/constant/constant";
+import trees from "@/assets/img/images/trees.svg";
 
 const Buy = () => {
   //////////
@@ -43,7 +44,7 @@ const Buy = () => {
     <section className={styles.dashboard} id="buy">
       <div className={styles.c1}>
         <div>
-          <span className={styles.t1}>{capital}</span>
+          <span className={styles.t1}>${capital}</span>
           &nbsp;&nbsp;&nbsp;
           <span>Capital Raised</span>
         </div>
@@ -59,13 +60,18 @@ const Buy = () => {
             </div>
           </div>
           <div className={styles.progress}>
-            <div className={styles.bar} style={{ width: "80%" }} />
+            <div className={styles.bar} style={{ width: "60%" }} />
           </div>
           <div className={styles.rp2}>
             <div>Buy Now Before Price Rise</div>
             <div>1 ALT = ${price}</div>
           </div>
         </div>
+        <div className={styles.pch}>
+          Your Purchased $ALT:{" "}
+          <span className={styles.pcht}>{userTotalBoughtAgri}</span>
+        </div>
+        <Image src={trees} className={styles.trees} />
       </div>
       <div className={styles.c2}>
         <div className={styles.box}>
@@ -166,7 +172,9 @@ const Buy = () => {
 
           {status == 1 && (
             <>
-              <Image src={tractor} alt="" className={styles.fail} />
+              <div class={styles.rotate}>
+                <Image src={tractor} alt="" className={styles.tokenicon} />
+              </div>
               <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
               <div className={styles.pc}>
                 In order to buy {altAmount} Agri with {selectedTkn}, please

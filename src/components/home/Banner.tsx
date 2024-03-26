@@ -40,7 +40,7 @@ const Banner = () => {
                 )}
               </div>
               <div className="banner-content text-center banner-sub-title">
-                Countdown until Round 1 ends
+                Countdown until round 1 ends
               </div>
             </div>
           </div>
