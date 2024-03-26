@@ -226,7 +226,7 @@ const Buy = () => {
             <>
               {selectedTkn == "USDT" && isApproved == false ? (
                 <div onClick={onApprove} className={styles.buy}>
-                  <span>Approve</span>
+                  <span>{isLoadingApprove ? "Approving" : "Approve"}</span>
                   {isLoadingApprove && (
                     <div class={styles.rotate}>
                       <Image src={tractor} alt="" className={styles.icon} />
