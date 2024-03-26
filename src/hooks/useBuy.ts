@@ -29,10 +29,15 @@ const useBuy = () => {
   let price = "";
   let capital = "";
   let isApproved = undefined;
+  let userTotalBoughtAgri = "";
   ///////////////////
   const { contract } = useContract(contractAddress, abi);
   const { contract: usdtContract } = useContract(usdtContractAddress, erc20Abi);
-
+  ////////
+  const {
+    data: _userTotalBoughtAgri,
+    isSuccess: userTotalBoughtAgriIsSuccess,
+  } = useContractRead(contract, "userTotalBoughtAgri", [address]);
   const { data: requiredAgri } = useContractRead(contract, "getAgriByBNB", [
     Number(amount) > 0 ? toWei(Number(amount)) : 0,
   ]);
@@ -47,7 +52,7 @@ const useBuy = () => {
   } = useContractWrite(usdtContract, "approve");
   const { data: allowance } = useContractRead(usdtContract, "allowance", [
     address,
-    address,
+    contractAddress,
   ]);
   const { mutateAsync: buyWithBNB, isLoading: isLoadingBuyWithBNB } =
     useContractWrite(contract, "buyWithBNB");
@@ -60,6 +65,14 @@ const useBuy = () => {
   ///////////
   if (allowance?.toString()) {
     isApproved = new BigNumber(allowance.toString()).comparedTo(0) > 0;
+  }
+  ///////////
+  if (_userTotalBoughtAgri && userTotalBoughtAgriIsSuccess) {
+    userTotalBoughtAgri = Number(
+      new BigNumber(_userTotalBoughtAgri.toString())
+        .dividedBy(10 ** 18)
+        .toFixed(2)
+    ).toString();
   }
   ///////////
   if (isSuccess && contractStats) {
@@ -113,7 +126,7 @@ const useBuy = () => {
     try {
       if (isLoadingApprove) return;
       const writeData = await approve({
-        args: [address, toWei(1000000000)],
+        args: [contractAddress, toWei(1000000000)],
       });
     } catch (error) {}
   };
@@ -155,6 +168,7 @@ const useBuy = () => {
     isLoadingApprove,
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
+    userTotalBoughtAgri,
   };
 };
 export default useBuy;

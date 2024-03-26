@@ -32,6 +32,7 @@ const Buy = () => {
     isLoadingApprove,
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
+    userTotalBoughtAgri,
   } = useBuy();
   //////////
   return (
@@ -226,7 +227,7 @@ const Buy = () => {
 
           <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
-            <div>0</div>
+            <div>{userTotalBoughtAgri}</div>
           </div>
         </div>
         <Image src={tractor} alt="" className={styles.tractor} />
