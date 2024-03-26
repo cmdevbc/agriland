@@ -183,7 +183,6 @@ const useBuy = () => {
           address: token.address,
           symbol: token.symbol,
           decimals: 18,
-          image: "https://foo.io/token-image.svg",
         },
       },
     });
