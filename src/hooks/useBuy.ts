@@ -29,6 +29,7 @@ const useBuy = () => {
   );
   let price = "";
   let progress = 0;
+  let roundNo;
   let capital = "";
   let isApproved = undefined;
   let userTotalBoughtAgri = "";
@@ -74,12 +75,19 @@ const useBuy = () => {
     []
   );
   ///////////
-  if (contractStats?.totalPool && contractStats?.amountSold) {
-    const n1 = new BigNumber(contractStats.totalPool.toString());
-    const n2 = new BigNumber(contractStats.amountSold.toString());
+  if (
+    totalAgriPool?.toString() &&
+    contractStats?.amountSold
+    //    contractStats?.totalAmount
+  ) {
+    const n1 = BigNumber(totalAgriPool.toString());
+    const n2 = BigNumber(contractStats.amountSold.toString());
+    //const n3 = new BigNumber(contractStats.totalAmount.toString());
     progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
   }
-  console.log(totalAgriPool);
+  if (contractStats?.roundNo) {
+    roundNo = Number(BigNumber(contractStats.roundNo.toString()));
+  }
   if (allowance?.toString()) {
     isApproved = new BigNumber(allowance.toString()).comparedTo(0) > 0;
   }

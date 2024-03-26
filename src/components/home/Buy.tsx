@@ -213,7 +213,7 @@ const Buy = () => {
             <>
               <Image src={tractor} alt="" className={styles.fail} />
               <div className={classNames(styles.pf, styles.cpnt)}>
-                PURCHASE FAILED!!
+                PURCHASE FAILED!
               </div>
               <div className={styles.btns}>
                 <div onClick={() => setStatus(0)} className={styles.btn}>

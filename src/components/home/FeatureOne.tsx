@@ -31,11 +31,10 @@ const feature_data: DataType[] = [
     title: <>2. Transfer BNB or USDT to MetaMask</>,
     desc: (
       <>
-        (Skip this step if utilizing a Card for payment) Have you set up your
-        Metamask? Transfer Binance Coin (BNB) or Tether (USDT) on the Binance
-        Smart Chain to your MetaMask wallet from your chosen cryptocurrency
-        storage location, or directly purchase BNB or USDT via MetaMask. This
-        digital currency is essential for acquiring AgriLand tokens.
+        Transfer Binance Coin (BNB) or Tether (USDT) on the Binance Smart Chain
+        to your MetaMask wallet from your chosen cryptocurrency storage
+        location, or directly purchase BNB or USDT via MetaMask. This digital
+        currency is essential for acquiring AgriLand tokens.
       </>
     ),
     img: featureImg_2,
