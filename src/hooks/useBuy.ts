@@ -89,8 +89,8 @@ const useBuy = () => {
   ///////////
   //////////
   useEffect(() => {
-    setAltAmount(null);
-    setAmount(null);
+    setAltAmount(0);
+    setAmount(0);
   }, [selectedTkn]);
   useEffect(() => {
     if (selectedTkn == "BNB") {

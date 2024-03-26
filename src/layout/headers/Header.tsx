@@ -40,9 +40,8 @@ const Header = () => {
                       <ul className="list-wrap">
                         <li className="header-login">
                           <ConnectWallet
-                            modalTitleIconUrl={
-                              "/assets/img/images/tractor2.png"
-                            }
+                            modalTitleIconUrl="/assets/img/banner/logo.png"
+                            modalTitle="AGRILAND"
                           />
                         </li>
                       </ul>
