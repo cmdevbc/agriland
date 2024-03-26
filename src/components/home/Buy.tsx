@@ -32,18 +32,12 @@ const Buy = () => {
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
     userTotalBoughtAgri,
-    isSuccessBuyWithBNB,
-    isSuccessBuyWithUSDT,
     transactionHash,
-    setTransactionHash,
+    status,
+    setStatus,
   } = useBuy();
   //////////
-  let status = 0;
-  if (isLoadingBuyWithUSDT || isLoadingBuyWithBNB) {
-    status = 1;
-  } else if ((isSuccessBuyWithBNB || isSuccessBuyWithUSDT) && transactionHash) {
-    status = 2;
-  }
+
   //////////
   return (
     <section className={styles.dashboard}>
@@ -170,34 +164,6 @@ const Buy = () => {
             </div>
           </div>
 
-          {status == 0 && (
-            <>
-              {selectedTkn == "USDT" && isApproved == false ? (
-                <div onClick={onApprove} className={styles.buy}>
-                  <span>Approve</span>
-                  {isLoadingApprove && (
-                    <Image src={loading} alt="" className={styles.icon} />
-                  )}
-                </div>
-              ) : selectedTkn == "USDT" ? (
-                <div onClick={onConfirm} className={styles.buy}>
-                  <Image src={usdt} alt="" className={styles.icon} />
-                  <span>Buy with USDT</span>
-                  {isLoadingBuyWithUSDT && (
-                    <Image src={loading} alt="" className={styles.icon} />
-                  )}
-                </div>
-              ) : (
-                <div onClick={onConfirm} className={styles.buy}>
-                  <Image src={bnb} alt="" className={styles.icon} />
-                  <span>Buy with BNB</span>
-                  {isLoadingBuyWithBNB && (
-                    <Image src={loading} alt="" className={styles.icon} />
-                  )}
-                </div>
-              )}
-            </>
-          )}
           {status == 1 && (
             <>
               <Image src={tractor} alt="" className={styles.fail} />
@@ -227,13 +193,51 @@ const Buy = () => {
                 >
                   View Transaction
                 </div>
-                <div
-                  onClick={() => setTransactionHash(null)}
-                  className={styles.btn}
-                >
+                <div onClick={() => setStatus(0)} className={styles.btn}>
                   Start Again
                 </div>
               </div>
+            </>
+          )}
+          {status == 3 && (
+            <>
+              <Image src={tractor} alt="" className={styles.fail} />
+              <div className={classNames(styles.pf, styles.cpnt)}>
+                PURCHASE FAILED!!
+              </div>
+              <div className={styles.btns}>
+                <div onClick={() => setStatus(0)} className={styles.btn}>
+                  Start Again
+                </div>
+              </div>
+            </>
+          )}
+          {status == 0 && (
+            <>
+              {selectedTkn == "USDT" && isApproved == false ? (
+                <div onClick={onApprove} className={styles.buy}>
+                  <span>Approve</span>
+                  {isLoadingApprove && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              ) : selectedTkn == "USDT" ? (
+                <div onClick={onConfirm} className={styles.buy}>
+                  <Image src={usdt} alt="" className={styles.icon} />
+                  <span>Buy with USDT</span>
+                  {isLoadingBuyWithUSDT && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              ) : (
+                <div onClick={onConfirm} className={styles.buy}>
+                  <Image src={bnb} alt="" className={styles.icon} />
+                  <span>Buy with BNB</span>
+                  {isLoadingBuyWithBNB && (
+                    <Image src={loading} alt="" className={styles.icon} />
+                  )}
+                </div>
+              )}
             </>
           )}
           <div className={styles.inf}>1 ALT = ${price} </div>

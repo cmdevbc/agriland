@@ -14,6 +14,7 @@ import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
 
 const useBuy = () => {
+  const [status, setStatus] = useState(0);
   const address = useAddress();
   const [selectedTkn, setSelectedTkn] = useState("BNB");
   const [transactionHash, setTransactionHash] = useState<any>();
@@ -40,12 +41,8 @@ const useBuy = () => {
   const { data: requiredBnb } = useContractRead(contract, "getRequiredBNB", [
     Number(altAmount) > 0 ? toWei(Number(altAmount)) : 0,
   ]);
-  const {
-    mutateAsync: approve,
-    isLoading: isLoadingApprove,
-    isError,
-    error,
-  } = useContractWrite(usdtContract, "approve");
+  const { mutateAsync: approve, isLoading: isLoadingApprove } =
+    useContractWrite(usdtContract, "approve");
   const { data: allowance } = useContractRead(usdtContract, "allowance", [
     address,
     contractAddress,
@@ -54,11 +51,13 @@ const useBuy = () => {
     mutateAsync: buyWithBNB,
     isLoading: isLoadingBuyWithBNB,
     isSuccess: isSuccessBuyWithBNB,
+    isError: isErrorBuyWithBNB,
   } = useContractWrite(contract, "buyWithBNB");
   const {
     mutateAsync: buyWithUSDT,
     isLoading: isLoadingBuyWithUSDT,
     isSuccess: isSuccessBuyWithUSDT,
+    isError: isErrorBuyWithUSDT,
   } = useContractWrite(contract, "buyWithUSDT");
   const { data: contractStats, isSuccess } = useContractRead(
     contract,
@@ -158,6 +157,23 @@ const useBuy = () => {
     } catch (error) {}
   };
   //////////
+  useEffect(() => {
+    if (isLoadingBuyWithUSDT || isLoadingBuyWithBNB) {
+      setStatus(1);
+    } else if (isSuccessBuyWithBNB || isSuccessBuyWithUSDT) {
+      setStatus(2);
+    } else if (isErrorBuyWithBNB || isErrorBuyWithUSDT) {
+      setStatus(3);
+    }
+  }, [
+    isLoadingBuyWithUSDT,
+    isLoadingBuyWithBNB,
+    isErrorBuyWithBNB,
+    isErrorBuyWithUSDT,
+    isSuccessBuyWithBNB,
+    isSuccessBuyWithUSDT,
+  ]);
+  //////////
   return {
     balance,
     price,
@@ -176,9 +192,10 @@ const useBuy = () => {
     isLoadingBuyWithBNB,
     userTotalBoughtAgri,
     transactionHash,
-    setTransactionHash,
     isSuccessBuyWithBNB,
     isSuccessBuyWithUSDT,
+    status,
+    setStatus,
   };
 };
 export default useBuy;
