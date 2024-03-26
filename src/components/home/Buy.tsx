@@ -2,8 +2,8 @@
 "use client";
 import alt from "@/assets/img/images/alt.png";
 import bnb from "@/assets/img/images/bnb.png";
-import card from "@/assets/img/images/card.png";
 import tractor from "@/assets/img/images/tractor2.png";
+import tick from "@/assets/img/images/tick.png";
 import usdt from "@/assets/img/images/usdt.svg";
 import wallet from "@/assets/img/images/wallet.png";
 import loading from "@/assets/img/images/loading.gif";
@@ -11,6 +11,8 @@ import classNames from "classnames";
 import Image from "next/image";
 import styles from "./Buy.module.css";
 import useBuy from "../../hooks/useBuy";
+import { blockExplorer } from "@/constant/constant";
+import trees from "@/assets/img/images/trees.svg";
 
 const Buy = () => {
   //////////
@@ -22,8 +24,6 @@ const Buy = () => {
     setAmount,
     altAmount,
     setAltAmount,
-    status,
-    setStatus,
     price,
     capital,
     onConfirm,
@@ -32,13 +32,21 @@ const Buy = () => {
     isLoadingApprove,
     isLoadingBuyWithUSDT,
     isLoadingBuyWithBNB,
+    userTotalBoughtAgri,
+    transactionHash,
+    status,
+    setStatus,
+    addToken,
+    progress,
   } = useBuy();
   //////////
+
+  //////////
   return (
-    <section className={styles.dashboard}>
+    <section className={styles.dashboard} id="buy">
       <div className={styles.c1}>
         <div>
-          <span className={styles.t1}>{capital}</span>
+          <span className={styles.t1}>${capital}</span>
           &nbsp;&nbsp;&nbsp;
           <span>Capital Raised</span>
         </div>
@@ -54,13 +62,18 @@ const Buy = () => {
             </div>
           </div>
           <div className={styles.progress}>
-            <div className={styles.bar} style={{ width: "80%" }} />
+            <div className={styles.bar} style={{ width: progress + "%" }} />
           </div>
           <div className={styles.rp2}>
             <div>Buy Now Before Price Rise</div>
             <div>1 ALT = ${price}</div>
           </div>
         </div>
+        <div className={styles.pch}>
+          Your Purchased $ALT:{" "}
+          <span className={styles.pcht}>{userTotalBoughtAgri}</span>
+        </div>
+        <Image src={trees} className={styles.trees} />
       </div>
       <div className={styles.c2}>
         <div className={styles.box}>
@@ -85,16 +98,6 @@ const Buy = () => {
               <Image src={usdt} alt="" className={styles.icon} />
               <div>USDT</div>
             </div>
-            {/*<div
-              onClick={() => setSelectedTkn("CARD")}
-              className={classNames(
-                styles.tkn,
-                selectedTkn == "CARD" && styles.selectedTkn
-              )}
-            >
-              <Image src={card} alt="" className={styles.icon} />
-              <div>Card</div>
-            </div>*/}
           </div>
           <div className={styles.blnc}>
             <Image src={wallet} alt="" className={styles.icon} />
@@ -163,19 +166,71 @@ const Buy = () => {
                   }}
                   className={styles.input}
                 />
-                <Image src={alt} alt="" className={styles.icon} />
+                <Image src={tractor} alt="" className={styles.icon} />
               </div>
               <div className={styles.hi}>$ALT you receive</div>
             </div>
           </div>
 
+          {status == 1 && (
+            <>
+              <div class={styles.rotate}>
+                <Image src={tractor} alt="" className={styles.tokenicon} />
+              </div>
+              <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
+              <div className={styles.pc}>
+                In order to buy {altAmount} Agri with {selectedTkn}, please
+                confirm the transaction in your wallet. You may need to check
+                the wallet app if you’re on mobile
+              </div>
+            </>
+          )}
+          {status == 2 && (
+            <>
+              <Image src={tick} alt="" className={styles.success} />
+              <div className={classNames(styles.pf, styles.cpnt)}>
+                PURCHASE SUCCESS!
+              </div>
+              <div className={styles.pc}>
+                Please click on the View Transaction button for more details.
+              </div>
+              <div className={styles.btns}>
+                <div
+                  onClick={() =>
+                    window.open(blockExplorer + transactionHash, "_blank")
+                  }
+                  className={styles.btn}
+                >
+                  View Transaction
+                </div>
+                <div onClick={() => setStatus(0)} className={styles.btn}>
+                  Start Again
+                </div>
+              </div>
+            </>
+          )}
+          {status == 3 && (
+            <>
+              <Image src={tractor} alt="" className={styles.fail} />
+              <div className={classNames(styles.pf, styles.cpnt)}>
+                PURCHASE FAILED!!
+              </div>
+              <div className={styles.btns}>
+                <div onClick={() => setStatus(0)} className={styles.btn}>
+                  Start Again
+                </div>
+              </div>
+            </>
+          )}
           {status == 0 && (
             <>
               {selectedTkn == "USDT" && isApproved == false ? (
                 <div onClick={onApprove} className={styles.buy}>
                   <span>Approve</span>
                   {isLoadingApprove && (
-                    <Image src={loading} alt="" className={styles.icon} />
+                    <div class={styles.rotate}>
+                      <Image src={tractor} alt="" className={styles.icon} />
+                    </div>
                   )}
                 </div>
               ) : selectedTkn == "USDT" ? (
@@ -197,36 +252,15 @@ const Buy = () => {
               )}
             </>
           )}
-          {status == 13 && (
-            <Image src={tractor} alt="" className={styles.fail} />
-          )}
-
-          {status == 13 && (
-            <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
-          )}
-          {status == 13 && (
-            <div className={styles.pc}>
-              In order to buy $ALT with BNB, please confirm the transaction in
-              your wallet. You may need to check the wallet app if you’re on
-              mobile
+          <div className={styles.infs}>
+            <div className={styles.inf}>1 ALT = ${price} </div>
+            <div className={styles.add} onClick={addToken}>
+              Add $ALT to Wallet
             </div>
-          )}
-          {status == 13 && (
-            <div className={styles.pc}>
-              Please click on the View Transaction button for more details.
-            </div>
-          )}
-          {status == 13 && (
-            <div className={styles.btns}>
-              <div className={styles.btn}>View Transaction</div>
-              <div className={styles.btn}>Start Again</div>
-            </div>
-          )}
-          <div className={styles.inf}>1 ALT = ${price} </div>
-
+          </div>
           <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
-            <div>0</div>
+            <div>{userTotalBoughtAgri}</div>
           </div>
         </div>
         <Image src={tractor} alt="" className={styles.tractor} />

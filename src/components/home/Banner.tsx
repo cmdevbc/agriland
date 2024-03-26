@@ -5,7 +5,7 @@ import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 import abi from "@/constant/abi.json";
-import { contractAddress } from "@/constant/address";
+import { contractAddress } from "@/constant/constant";
 
 const Banner = () => {
   const { contract } = useContract(contractAddress, abi);
@@ -40,7 +40,7 @@ const Banner = () => {
                 )}
               </div>
               <div className="banner-content text-center banner-sub-title">
-                Countdown until Round 1 ends
+                Countdown until round 1 ends
               </div>
             </div>
           </div>

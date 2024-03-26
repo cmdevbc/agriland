@@ -39,7 +39,10 @@ const Header = () => {
                     <div className="header-action">
                       <ul className="list-wrap">
                         <li className="header-login">
-                          <ConnectWallet />
+                          <ConnectWallet
+                            modalTitleIconUrl="/assets/img/banner/logo.png"
+                            modalTitle="AGRILAND"
+                          />
                         </li>
                       </ul>
                     </div>

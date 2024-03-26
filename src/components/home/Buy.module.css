@@ -35,12 +35,12 @@
   padding: 35px 28px 28px 28px;
   text-align: center;
   position: relative;
+  left: 120px;
 }
 .tractor {
   width: 250px;
   height: 250px;
   position: relative;
-  left: -120px;
 }
 .tkns {
   display: flex;
@@ -112,12 +112,22 @@
   margin-top: 4px;
   text-align: left;
 }
+.tokenicon {
+  width: 20px;
+  height: 20px;
+}
 .fail {
   width: 20px;
   height: 20px;
   margin-top: 13px;
   transform: rotate(50.655deg);
 }
+.success {
+  width: 20px;
+  height: 20px;
+  margin-top: 13px;
+}
+
 .pf {
   color: #44a08d;
   font-size: 12px;
@@ -125,7 +135,6 @@
   margin-top: 3px;
 }
 .cpnt {
-  cursor: pointer;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -136,7 +145,7 @@
 .pc {
   color: #fff;
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .btns {
   display: flex;
@@ -166,13 +175,27 @@
   font-size: 14px;
   font-weight: 600;
 }
-.inf {
+.infs {
   margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inf {
   color: #fff;
   font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
   text-align: left;
+}
+.add {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #1c1d34;
+  padding: 6px 14px;
 }
 .rp {
   width: 90%;
@@ -238,15 +261,40 @@
   cursor: pointer;
   margin-top: 70px;
 }
-
+.rotate {
+  animation: rotateAnim 1.5s infinite linear;
+  line-height: 1;
+}
+.trees {
+  margin-top: 40px;
+  height: 160px;
+}
+.pch {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 36px;
+}
+.pcht {
+  font-size: 20px;
+  font-weight: 400;
+}
+@keyframes rotateAnim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media only screen and (max-width: 1400px) and (min-width: 800px) {
   .tractor {
     position: absolute;
     right: 0;
-    left: unset;
   }
   .box {
     width: 415px;
+    left: unset;
   }
 }
 @media only screen and (max-width: 1200px) {
