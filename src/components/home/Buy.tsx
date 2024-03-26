@@ -158,7 +158,7 @@ const Buy = () => {
                   }}
                   className={styles.input}
                 />
-                <Image src={alt} alt="" className={styles.icon} />
+                <Image src={tractor} alt="" className={styles.icon} />
               </div>
               <div className={styles.hi}>$ALT you receive</div>
             </div>
@@ -218,7 +218,9 @@ const Buy = () => {
                 <div onClick={onApprove} className={styles.buy}>
                   <span>Approve</span>
                   {isLoadingApprove && (
-                    <Image src={loading} alt="" className={styles.icon} />
+                    <div class={styles.rotate}>
+                      <Image src={tractor} alt="" className={styles.icon} />
+                    </div>
                   )}
                 </div>
               ) : selectedTkn == "USDT" ? (

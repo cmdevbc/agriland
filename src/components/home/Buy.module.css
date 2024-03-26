@@ -242,7 +242,18 @@
   cursor: pointer;
   margin-top: 70px;
 }
+.rotate {
+  animation: rotateAnim 1.5s infinite linear;
+}
 
+@keyframes rotateAnim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media only screen and (max-width: 1400px) and (min-width: 800px) {
   .tractor {
     position: absolute;
