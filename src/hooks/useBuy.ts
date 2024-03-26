@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 
 const useBuy = () => {
   const address = useAddress();
-  const [status, setStatus] = useState(0);
   const [selectedTkn, setSelectedTkn] = useState("BNB");
   const [amount, setAmount] = useState<any>();
   const [altAmount, setAltAmount] = useState<any>();
@@ -160,8 +159,6 @@ const useBuy = () => {
     setAmount,
     altAmount,
     setAltAmount,
-    status,
-    setStatus,
     onConfirm,
     onApprove,
     isApproved,

@@ -22,8 +22,6 @@ const Buy = () => {
     setAmount,
     altAmount,
     setAltAmount,
-    status,
-    setStatus,
     price,
     capital,
     onConfirm,
@@ -34,6 +32,11 @@ const Buy = () => {
     isLoadingBuyWithBNB,
     userTotalBoughtAgri,
   } = useBuy();
+  //////////
+  let status = 0;
+  if (isLoadingBuyWithUSDT || isLoadingBuyWithBNB) {
+    status = 1;
+  }
   //////////
   return (
     <section className={styles.dashboard}>
@@ -198,20 +201,21 @@ const Buy = () => {
               )}
             </>
           )}
-          {status == 13 && (
-            <Image src={tractor} alt="" className={styles.fail} />
+          {status == 1 && (
+            <>
+              <Image src={tractor} alt="" className={styles.fail} />
+              <div className={styles.pc}>
+                In order to buy {altAmount} Agri with {selectedTkn}, please
+                confirm the transaction in your wallet. You may need to check
+                the wallet app if you’re on mobile
+              </div>
+            </>
           )}
 
           {status == 13 && (
             <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
           )}
-          {status == 13 && (
-            <div className={styles.pc}>
-              In order to buy $ALT with BNB, please confirm the transaction in
-              your wallet. You may need to check the wallet app if you’re on
-              mobile
-            </div>
-          )}
+
           {status == 13 && (
             <div className={styles.pc}>
               Please click on the View Transaction button for more details.
