@@ -690,7 +690,13 @@
   }
 }
 @media only screen and (max-width: 450px) {
+  .features-item {
+    height: auto;
+  }
   .roadmapHolder {
-    display: unset;
+    flex-direction: column;
+  }
+  .roadmap-content .title .dot::after {
+    height: 80px;
   }
 }
