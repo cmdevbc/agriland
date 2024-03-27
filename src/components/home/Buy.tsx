@@ -143,7 +143,7 @@ const Buy = () => {
                 />
                 <div className={styles.max}>Max</div>
               </div>
-              <div className={styles.hi}>BNB to pay</div>
+              <div className={styles.hi}>{selectedTkn} to pay</div>
             </div>
             <div className={styles.f1}>
               <div className={styles.inpb}>
@@ -179,7 +179,7 @@ const Buy = () => {
               </div>
               <div className={classNames(styles.pf, styles.cpnt)}>CONFIRM</div>
               <div className={styles.pc}>
-                In order to buy {altAmount} Agri with {selectedTkn}, please
+                In order to buy {altAmount} ALT with {selectedTkn}, please
                 confirm the transaction in your wallet. You may need to check
                 the wallet app if you’re on mobile
               </div>
