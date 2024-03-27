@@ -108,7 +108,7 @@ const useBuy = () => {
       contractStats.usdCapitalRaised.toString()
     ).dividedBy(10 ** 18);
     price = _price.toString();
-    capital = _capital.toString();
+    capital = Number(_capital.toString()).toFixed(0);
   }
   ///////////
   //////////

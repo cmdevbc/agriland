@@ -248,7 +248,7 @@
     display: flex;
   }
   .banner-content .title {
-    font-size: 45px;
+    font-size: 40px;
   }
   .header-action {
   }
@@ -414,7 +414,7 @@
     font-size: 16px;
   }
   .section-title .title {
-    font-size: 36px;
+    font-size: 32px;
   }
   .features-item {
     padding: 30px;
@@ -478,7 +478,7 @@
     padding: 100px 0 0;
   }
   .roadmap-area {
-    padding: 100px 0 0;
+    padding: 0;
   }
   .team-area {
     padding: 100px 0;
@@ -640,13 +640,16 @@
   .team-bg {
     margin: 0;
   }
+  .roadmap-item {
+    height: auto;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .container,
   .custom-container {
-    max-width: 540px;
+    max-width: 95%;
   }
   .chart-wrap .chart {
     width: 340px;
@@ -698,5 +701,8 @@
   }
   .roadmap-content .title .dot::after {
     height: 80px;
+  }
+  .roadmap-item {
+    height: auto;
   }
 }

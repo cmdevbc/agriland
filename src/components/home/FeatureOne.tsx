@@ -53,13 +53,13 @@ const feature_data: DataType[] = [
   },
   {
     id: 4,
-    title: <>4. Claim AgriLand Tokens</>,
+    title: <>4. Receive Agriland Tokens</>,
     desc: (
       <>
-        Following the conclusion of the presale, participants are eligible to
-        claim their AgriLand tokens on the platform. This marks your integration
-        into the AgriLand community, a dynamic group within the cryptocurrency
-        ecosystem.
+        Following the purchase of $ALT at the presale, participants receive
+        their AgriLand tokens on their wallet directly. This marks your
+        integration into the AgriLand community, a dynamic group within the
+        cryptocurrency ecosystem.
       </>
     ),
     img: featureImg_4,
@@ -67,7 +67,7 @@ const feature_data: DataType[] = [
 ];
 const FeatureOne = () => {
   return (
-    <section id="how" className="features-area pt-140 pb-110">
+    <section id="how" className="features-area pt-50">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-10">

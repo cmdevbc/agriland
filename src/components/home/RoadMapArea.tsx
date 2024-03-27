@@ -128,7 +128,7 @@ const settings = {
 
 const RoadMapArea = () => {
   return (
-    <section id="roadMap" className="roadmap-area pt-140">
+    <section id="roadMap" className="roadmap-area pt-50">
       <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-lg-12">
@@ -140,7 +140,7 @@ const RoadMapArea = () => {
         {/* <Slider {...settings} className="row roadMap-active"> */}
         <div className="roadmapHolder">
           {roadmap_data.map((item) => (
-            <div key={item.id} className="col-lg-3">
+            <div key={item.id} className="col-lg-6">
               <div className="roadmap-item">
                 <div className="roadmap-content">
                   <h4 className="title">

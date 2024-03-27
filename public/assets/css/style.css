@@ -885,8 +885,8 @@ label {
 }
 .roadmapHolder {
   display: flex;
-  gap: 10px;
   margin: 10px;
+  flex-wrap: wrap;
 }
 .logo > a {
   display: flex;
@@ -1431,7 +1431,6 @@ label {
   border-radius: 15px;
   padding: 40px 70px 40px 55px;
   margin-bottom: 30px;
-  height: 400px;
 }
 .features-content {
   width: 50%;
@@ -1718,7 +1717,8 @@ label {
   height: 100%;
 }
 .roadmap-item {
-  height: 100%;
+  margin: 10px;
+  height: 330px;
 }
 .roadmap-content .title {
   display: flex;
@@ -1761,7 +1761,7 @@ label {
   transform: translateX(-50%);
   bottom: 24px;
   width: 1px;
-  height: 120px;
+  height: 80px;
   background: #292a37;
 }
 .roadmap-content p {
