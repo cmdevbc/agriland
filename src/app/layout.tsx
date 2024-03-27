@@ -49,7 +49,7 @@ export default function RootLayout({
         className={` ${inter.variable} ${heading.variable}`}
       >
         <ThirdwebProvider
-          activeChain={"binance-testnet"}
+          activeChain={"binance"}
           supportedWallets={[
             metamaskWallet({ recommended: true }),
             coinbaseWallet(),

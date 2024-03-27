@@ -1,8 +1,8 @@
-export const contractAddress = "0x39c1bc538109B7C5D56dD95e7B91F5C38945Dbc6";
-export const usdtContractAddress = "0xb75b8E1807f4F6b373bB4a64a4A3B1655651dDF7";
-export const chainId = 97;
-export const blockExplorer = "https://testnet.bscscan.com/tx/";
+export const contractAddress = "0xE63c4e4a5c77d0FA008c08ED64815Bc25F99B7Ea";
+export const usdtContractAddress = "0x55d398326f99059fF775485246999027B3197955";
+export const chainId = 56;
+export const blockExplorer = "https://bscscan.com/tx/";
 export const token = {
   address: "0x25baB9d72Bc565A7cD7aC811804B0974eb100ebA",
-  symbol: "AGRI",
+  symbol: "ALT",
 };
