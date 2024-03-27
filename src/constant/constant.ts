@@ -1,4 +1,4 @@
-export const contractAddress = "0x35531644ea8741bB8340E1Be76B41e83f462C459";
+export const contractAddress = "0x92ED6f8606f942D2C53cD8f995e4ce418D51b36B";
 export const usdtContractAddress = "0x55d398326f99059fF775485246999027B3197955";
 export const chainId = 56;
 export const blockExplorer = "https://bscscan.com/tx/";
