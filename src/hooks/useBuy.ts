@@ -162,7 +162,6 @@ const useBuy = () => {
         if (selectedTkn == "BNB") {
           if (isLoadingBuyWithBNB) return;
           const writeData = await buyWithBNB({
-            args: [toWei(altAmount)],
             overrides: { value: requiredBnb.toString() },
           });
           if (writeData?.receipt?.transactionHash) {
