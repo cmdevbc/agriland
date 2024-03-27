@@ -128,7 +128,7 @@ const settings = {
 
 const RoadMapArea = () => {
   return (
-    <section id="roadMap" className="roadmap-area pt-50">
+    <section id="info" className="roadmap-area pt-50">
       <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-lg-12">
