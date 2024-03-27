@@ -101,7 +101,28 @@
   },
   {
     "type": "function",
+    "name": "burnFromRound",
+    "inputs": [
+      { "name": "roundNo", "type": "uint256", "internalType": "uint256" },
+      {
+        "name": "agriTokenAmount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "buyWithBNB",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "buyWithBNB2",
     "inputs": [
       {
         "name": "agriTokenAmount",
