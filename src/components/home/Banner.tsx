@@ -3,20 +3,26 @@ import CountdownClock from "@/ui/CountDownClock";
 import Image from "next/image";
 import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
-import abi from "@/constant/abi.json";
-import { contractAddress } from "@/constant/constant";
+import useStats from "@/hooks/useStats";
 
 const Banner = () => {
-  const { contract } = useContract(contractAddress, abi);
-  const { data: contractStats, isSuccess } = useContractRead(
-    contract,
-    "getStats"
-  );
-  const endTimestamp =
-    isSuccess && contractStats && contractStats.endTimestamp
-      ? parseInt(contractStats.endTimestamp.toString()) * 1000
-      : 0;
+  const { currentRound, startTimestamp, endTimestamp } = useStats();
+
+  let timestamp = 0;
+  let isEndTimeStamp = false;
+  if (startTimestamp && endTimestamp) {
+    const t0 = Date.now();
+    const t1 = parseInt(startTimestamp) * 1000;
+    const t2 = parseInt(endTimestamp) * 1000;
+
+    if (t0 < t1) {
+      timestamp = t1;
+      isEndTimeStamp = false;
+    } else if (t0 < t2) {
+      timestamp = t2;
+      isEndTimeStamp = true;
+    }
+  }
 
   return (
     <section
@@ -33,14 +39,16 @@ const Banner = () => {
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
               <div className="banner-countdown-wrap">
-                {endTimestamp > 0 && (
+                {timestamp > 0 && (
                   <div className="coming-time">
-                    <CountdownClock endTimestamp={endTimestamp} />
+                    <CountdownClock endTimestamp={timestamp} />
                   </div>
                 )}
               </div>
               <div className="banner-content text-center banner-sub-title">
-                Countdown Until Round 1 Ends
+                Countdown Until Round{" "}
+                {currentRound != null ? currentRound + 1 : undefined}{" "}
+                {isEndTimeStamp ? "Ends" : "Starts"}
               </div>
             </div>
           </div>
