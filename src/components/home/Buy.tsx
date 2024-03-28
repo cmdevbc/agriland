@@ -38,6 +38,7 @@ const Buy = () => {
     setStatus,
     addToken,
     progress,
+    currentAmountLeft,
   } = useBuy();
   //////////
 
@@ -258,10 +259,13 @@ const Buy = () => {
               Add $ALT to Wallet
             </div>
           </div>
-          <div className={styles.lr}>
+          <div className={styles.la}>
+            {currentAmountLeft} ALT left for current round
+          </div>
+          {/* <div className={styles.lr}>
             <div>Your Purchased $ALT</div>
             <div>{userTotalBoughtAgri}</div>
-          </div>
+          </div>*/}
         </div>
         <Image src={tractor} alt="" className={styles.tractor} />
       </div>

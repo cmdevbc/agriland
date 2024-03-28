@@ -33,6 +33,7 @@ const useBuy = () => {
   let capital = "";
   let isApproved = undefined;
   let userTotalBoughtAgri = "";
+  let currentAmountLeft = "";
   ///////////////////
   const { contract } = useContract(contractAddress, abi);
   const { contract: usdtContract } = useContract(usdtContractAddress, erc20Abi);
@@ -75,14 +76,22 @@ const useBuy = () => {
     []
   );
   ///////////
+
+  if (contractStats?.currentAmountLeft?.toString()) {
+    currentAmountLeft = Number(
+      BigNumber(contractStats.currentAmountLeft.toString())
+        .dividedBy(10 ** 18)
+        .toFixed(2)
+    ).toLocaleString();
+  }
   if (
     totalAgriPool?.toString() &&
     contractStats?.amountSold
     //    contractStats?.totalAmount
   ) {
-    const n1 = BigNumber(totalAgriPool.toString());
+    //const n1 = BigNumber(totalAgriPool.toString());
+    const n1 = BigNumber("1000").multipliedBy(10 ** 18);
     const n2 = BigNumber(contractStats.amountSold.toString());
-    //const n3 = new BigNumber(contractStats.totalAmount.toString());
     progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
   }
   if (contractStats?.roundNo) {
@@ -108,7 +117,7 @@ const useBuy = () => {
       contractStats.usdCapitalRaised.toString()
     ).dividedBy(10 ** 18);
     price = _price.toString();
-    capital = Number(_capital.toString()).toFixed(0);
+    capital = Number(_capital.toFixed(0).toString()).toLocaleString();
   }
   ///////////
   //////////
@@ -181,7 +190,6 @@ const useBuy = () => {
   };
   //////////
   const addToken = async () => {
-    console.log(111);
     await window.ethereum.request({
       method: "wallet_watchAsset",
       params: {
@@ -236,6 +244,7 @@ const useBuy = () => {
     setStatus,
     addToken,
     progress,
+    currentAmountLeft,
   };
 };
 export default useBuy;

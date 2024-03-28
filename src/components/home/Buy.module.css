@@ -287,6 +287,12 @@
     transform: rotate(360deg);
   }
 }
+.la {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+}
 @media only screen and (max-width: 1400px) and (min-width: 800px) {
   .tractor {
     position: absolute;
