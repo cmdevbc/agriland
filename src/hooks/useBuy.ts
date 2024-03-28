@@ -90,9 +90,10 @@ const useBuy = () => {
     //    contractStats?.totalAmount
   ) {
     //const n1 = BigNumber(totalAgriPool.toString());
-    const n1 = BigNumber("1000").multipliedBy(10 ** 18);
+    const n1 = BigNumber("500").multipliedBy(10 ** 18);
     const n2 = BigNumber(contractStats.amountSold.toString());
     progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
+    console.log("Progress:", progress + "%");
   }
   if (contractStats?.roundNo) {
     roundNo = Number(BigNumber(contractStats.roundNo.toString()));
