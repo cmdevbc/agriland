@@ -271,6 +271,7 @@
     font-size: 40px;
   }
   .features-item {
+    height: auto;
     padding: 40px 40px 40px 40px;
   }
   .section-title-two.section-title .title {

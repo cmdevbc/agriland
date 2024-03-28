@@ -1431,6 +1431,7 @@ label {
   border-radius: 15px;
   padding: 40px 70px 40px 55px;
   margin-bottom: 30px;
+  height: 450px;
 }
 .features-content {
   width: 50%;
@@ -1447,7 +1448,7 @@ label {
   text-align: right;
 }
 .features-img-1 {
-  width: 164px;
+  width: 130px;
   height: auto;
 }
 .features-content p {
