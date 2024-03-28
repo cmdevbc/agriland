@@ -34,6 +34,7 @@ const useBuy = () => {
   let isApproved = undefined;
   let userTotalBoughtAgri = "";
   let currentAmountLeft = "";
+
   ///////////////////
   const { contract } = useContract(contractAddress, abi);
   const { contract: usdtContract } = useContract(usdtContractAddress, erc20Abi);
@@ -86,15 +87,20 @@ const useBuy = () => {
   }
   if (
     totalAgriPool?.toString() &&
-    contractStats?.amountSold
-    //    contractStats?.totalAmount
+    contractStats?.amountSold &&
+    contractStats?.totalAmount
   ) {
     const n1 = BigNumber(totalAgriPool.toString());
     //const n1 = BigNumber("500").multipliedBy(10 ** 18);
     const n2 = BigNumber(contractStats.amountSold.toString());
     progress = Number(n2.dividedBy(n1).multipliedBy(100).toString());
     //console.log("Progress:", progress + "%");
+
+    //////////
+    //    const n3 = BigNumber(contractStats.totalAmount.toString());
+    //  midOfProgress = Number(n3.dividedBy(n1).multipliedBy(100).toString());
   }
+
   if (contractStats?.roundNo) {
     roundNo = Number(BigNumber(contractStats.roundNo.toString()));
   }
