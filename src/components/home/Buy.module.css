@@ -30,7 +30,7 @@
   width: 442px;
   flex-shrink: 0;
   border-radius: 20px;
-  border: 2px solid #00a28c;
+  border: 2px solid #35855b;
   background: #0f101e;
   z-index: 10;
   padding: 35px 28px 28px 28px;
@@ -68,7 +68,10 @@
   cursor: pointer;
 }
 .selectedTkn {
-  background: #44a08d;
+  background: #35855b;
+}
+.tkn:hover {
+  background: #35855b;
 }
 .icon {
   width: 20px;
