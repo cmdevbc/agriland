@@ -124,7 +124,7 @@ const Buy = () => {
                     const [integerPart, decimalPart] = inputValue.split(".");
                     const l1 = integerPart ? integerPart.length : 0;
                     const l2 = decimalPart ? decimalPart.length : 0;
-                    if (l1 + l2 <= 6) {
+                    if (l1 + l2 <= 7) {
                       setAmount(inputValue);
                       setAltAmount(null);
                     }
@@ -160,7 +160,7 @@ const Buy = () => {
                     const [integerPart, decimalPart] = inputValue.split(".");
                     const l1 = integerPart ? integerPart.length : 0;
                     const l2 = decimalPart ? decimalPart.length : 0;
-                    if (l1 + l2 <= 6) {
+                    if (l1 + l2 <= 7) {
                       setAltAmount(inputValue);
                       setAmount(null);
                     }
