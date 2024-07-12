@@ -47,7 +47,7 @@ const Banner = () => {
               </div>
               <div className="banner-content text-center banner-sub-title">
                 Countdown Until Round{" "}
-                {currentRound != null ? currentRound + 1 : undefined}{" "}
+                {currentRound != null ? currentRound : undefined}{" "}
                 {isEndTimeStamp ? "Ends" : "Starts"}
               </div>
             </div>
