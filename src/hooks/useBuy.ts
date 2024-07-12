@@ -82,6 +82,7 @@ const useBuy = () => {
     currentAmountLeft = Number(
       BigNumber(contractStats.currentAmountLeft.toString())
         .dividedBy(10 ** 18)
+        .minus(1833333)
         .toFixed(2)
     ).toLocaleString();
   }
