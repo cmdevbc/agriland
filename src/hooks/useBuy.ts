@@ -82,7 +82,7 @@ const useBuy = () => {
     currentAmountLeft = Number(
       BigNumber(contractStats.currentAmountLeft.toString())
         .dividedBy(10 ** 18)
-        .minus(1833333)
+        .minus(2533333)
         .toFixed(2)
     ).toLocaleString();
   }
@@ -125,7 +125,7 @@ const useBuy = () => {
       contractStats.usdCapitalRaised.toString()
     ).dividedBy(10 ** 18);
     price = _price.toString();
-    capital = Number(_capital.toFixed(0).toString() - 2600000).toLocaleString();
+    capital = Number(_capital.toFixed(0).toString() - 2460000).toLocaleString();
   }
   ///////////
   //////////
