@@ -9,13 +9,15 @@ import FeatureOne from "./FeatureOne";
 import FeatureTwo from "./FeatureTwo";
 import RoadMapArea from "./RoadMapArea";
 import Team from "./Team";
+import LiveData from "./LiveData/LiveData";
 
 const Home = () => {
   return (
     <>
       <Banner />
-      <Buy />
+      {/* <Buy /> */}
       {/*<Contribution />*/}
+      <LiveData />
       <FeatureOne />
       <RoadMapArea />
     </>

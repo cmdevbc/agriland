@@ -206,6 +206,7 @@ const useBuy = () => {
           address: token.address,
           symbol: token.symbol,
           decimals: 18,
+          image: token.image,
         },
       },
     });

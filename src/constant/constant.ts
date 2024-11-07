@@ -5,4 +5,5 @@ export const blockExplorer = "https://bscscan.com/tx/";
 export const token = {
   address: "0x243dAf44CC1796c9910775d722a542E3e36F258D",
   symbol: "ALT",
+  image: "https://agriland.fi/assets/img/banner/logo.png",
 };
