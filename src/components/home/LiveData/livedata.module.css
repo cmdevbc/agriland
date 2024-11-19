@@ -1,9 +1,16 @@
-.graphContainer {
-  flex-grow: 1;
+.graphWrap {
+  /* flex-grow: 1; */
 }
 
-.detailsContainer {
-  min-width: 250px;
+.graph {
+  width: 50% !important;
+  flex: 1;
+}
+
+.tokenDetails {
+  flex: none;
+  width: 20%;
+  max-width: 250px;
 }
 
 .wrap {
@@ -25,6 +32,7 @@
   opacity: 0.8;
   margin: 0;
 }
+
 .tokenD {
   display: flex;
   align-items: center;
@@ -32,6 +40,7 @@
   font-size: 2rem;
   font-weight: 500;
 }
+
 .add {
   color: #fff;
   font-size: 12px;
@@ -40,20 +49,20 @@
   border-radius: 5px;
   background: #1c1d34;
   padding: 0.5rem 1rem;
-  width: fit-content;
+  width: 10.5rem;
+  text-align: center;
 }
+
 .add:hover {
   background: #35855b;
 }
 
 .pancakeSwapBtn {
   margin: 1.5rem 0;
-  background: linear-gradient(
-    286deg,
-    var(--tg-primary-color) 0,
-    var(--tg-green) 87.6%,
-    var(--tg-black) 109.23%
-  );
+  background: linear-gradient(286deg,
+      var(--tg-primary-color) 0,
+      var(--tg-green) 87.6%,
+      var(--tg-black) 109.23%);
   color: #fff;
   font-size: 1.2rem;
   width: -moz-fit-content;
@@ -62,7 +71,10 @@
   border-radius: 0.5rem;
   border: 1px solid #17271a;
   cursor: pointer;
+  width: 10.5rem;
+  margin-bottom: 1rem;
 }
+
 @media only screen and (max-width: 1400px) and (min-width: 800px) {
   .wrap {
     padding-left: 20px;
@@ -72,8 +84,33 @@
 
 @media only screen and (max-width: 800px) {
   .wrap {
-    flex-direction: column-reverse;
-    padding-left: 5px;
-    padding-right: 5px;
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 0;
+  }
+
+  .tokenDetails {
+    width: fit-content;
+  }
+
+  .graphTitle {
+    font-size: 1.75rem;
+  }
+
+  .graph {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .wrap {
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+  }
+
+  .graphTitle {
+    font-size: 1.5rem;
   }
 }

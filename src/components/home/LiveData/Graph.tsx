@@ -13,12 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 import styles from "./livedata.module.css";
-type FilterData = {
-  [key: string]: {
-    value: number;
-    numOfPoints: number;
-  };
-};
+import { convertToTime, showTimeLabel } from "@/utils/dateandtime";
 
 type GraphData = {
   coordinates: [number, string][];
@@ -36,10 +31,22 @@ ChartJS.register(
   zoomPlugin
 );
 type Props = {};
+function getMinMax(data: [number, string][]) {
+  return data.reduce(
+    (acc, [_, value]) => {
+      const numValue = parseFloat(value);
+      acc.min = Math.min(acc.min, numValue);
+      acc.max = Math.max(acc.max, numValue);
+      return acc;
+    },
+    { min: Infinity, max: -Infinity }
+  );
+}
+
 function generateCryptoData() {
   const startTime = Math.floor(Date.now() / 1000); // current time in seconds
-  const dataPoints = 60; // total data points
-  const interval = 12 * 60; // 12 minutes in seconds
+  const dataPoints = 50; // total data points
+  const interval = 12 * 10; // 12 minutes in seconds
 
   const cryptoData: [number, string][] = Array.from(
     { length: dataPoints },
@@ -52,30 +59,7 @@ function generateCryptoData() {
 
   return cryptoData;
 }
-const getDoubleDigit = (num: number) => (num < 10 ? `0${num}` : num);
 
-const showTimeLabel = (epochTime: number) => {
-  const date = new Date(epochTime * 1000);
-  return `${getDoubleDigit(date.getHours())}:${getDoubleDigit(
-    date.getMinutes()
-  )}`;
-};
-
-const showDateLabel = (epochTime: number) => {
-  const date = new Date(epochTime * 1000);
-  return `${getDoubleDigit(date.getMonth() + 1)}/${getDoubleDigit(
-    date.getDate()
-  )}`;
-};
-
-const convertToTime = (epochTime: number) => {
-  const date = new Date(epochTime * 1000);
-  return `${date.getFullYear()}/${getDoubleDigit(
-    date.getMonth() + 1
-  )}/${getDoubleDigit(date.getDate())} ${getDoubleDigit(
-    date.getHours()
-  )}:${getDoubleDigit(date.getMinutes())}:${getDoubleDigit(date.getSeconds())}`;
-};
 
 function Graph({}: Props) {
   const mockGraphData: GraphData = {
@@ -88,16 +72,26 @@ function Graph({}: Props) {
     return mockGraphData.coordinates.map((item) => parseFloat(item[1]));
   }, [mockGraphData.coordinates]);
 
+  const { min, max } = getMinMax(mockGraphData.coordinates);
+
+console.log("Lowest value:", min);
+console.log("Highest value:", max);
+const diffValue = max- min;
+const offsetValueForGraph = diffValue*0.15;
+
   const numOfDataPoints = mockGraphData.coordinates.length;
+  
   const numOfTicks = 6;
+
   const stepSize = Math.max(Math.floor(numOfDataPoints / numOfTicks), 1);
   let zoomLevel = 1;
   // @ts-ignore
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
     aspectRatio: 5 / 1,
     onResize: (chart: any, size: any) => {
-      chart.options.aspectRatio = size.width <= 600 ? 3 / 2 : 9 / 4;
+      chart.options.aspectRatio = size.width <= 600 ? 1/1 : 9 / 4;
       chart.update();
     },
     scales: {
@@ -111,8 +105,8 @@ function Graph({}: Props) {
         },
       },
       y: {
-        min: 0.1,
-        max: 0.5,
+        min: min-offsetValueForGraph,
+        max: max+offsetValueForGraph,
         position: "right",
         title: {
           display: true,
@@ -146,11 +140,9 @@ function Graph({}: Props) {
             convertToTime(mockLabels[tooltipItems[0].dataIndex]),
           label: (context: any) => {
             const label = context.dataset.label;
-            console.log("label", label);
             if (label === "ALT") {
               return `$ALT: $${dataset[context.dataIndex].toFixed(2)}`;
             }
-            return "anj";
           },
         },
         displayColors: false,
@@ -190,16 +182,16 @@ function Graph({}: Props) {
     ],
   };
 
-  const memoizedGraph = useMemo(() => {
+  const DataGraph = (() => {
     // @ts-ignore
     return <Line options={options} data={data} />;
-  }, [data]);
+  });
 
   return (
-    <div className={styles.graphContainer}>
-      <h2 className={styles.graphTitle}>Any Title Here</h2>
-      {memoizedGraph}
-    </div>
+    <>
+      <h2 className={styles.graphTitle}>Live $ALT Price</h2>
+      <DataGraph/>
+    </>
   );
 }
 

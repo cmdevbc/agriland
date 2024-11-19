@@ -20,6 +20,7 @@ import {
   useSwitchChain,
 } from "@thirdweb-dev/react";
 import { useEffect } from "react";
+import { AppContextProvider } from "@/context/AppContext";
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -32,6 +33,7 @@ const heading = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--tg-heading-font-family",
 });
+
 
 export default function RootLayout({
   children,
@@ -79,11 +81,12 @@ const AppLayout = ({ children }: { children: any }) => {
   const address = useAddress();
   const chainId = useChainId();
   const switchChain = useSwitchChain();
+
   useEffect(() => {
     if (address && chainId && chainId != _chainId) {
       switchChain(_chainId);
     }
   }, [address]);
 
-  return <>{children}</>;
+  return <><AppContextProvider> {children}</AppContextProvider> </>;
 };
