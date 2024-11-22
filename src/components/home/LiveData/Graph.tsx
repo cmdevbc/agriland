@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -181,6 +181,7 @@ const offsetValueForGraph = diffValue*0.15;
       },
     ],
   };
+
 
   const DataGraph = (() => {
     // @ts-ignore
