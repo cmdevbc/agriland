@@ -13,7 +13,7 @@ const defaultContextValue = {
 
 // Context provider component
 export const AppContextProvider= ({ children }) => {
-  const [tokenPrice, setTokenPrice] = useState(1.2);
+  const [tokenPrice, setTokenPrice] = useState(0);
 
   return (
     <AppContext.Provider value={{ tokenPrice, setTokenPrice }}>

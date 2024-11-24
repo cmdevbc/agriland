@@ -11,12 +11,11 @@ export async function GET() {
   }
 
   try {
-    // Fetch data from NodeReal API (using POST)
+    
     const response = await fetch('https://open-platform.nodereal.io/67cab1fd2af841e6a89015375cdb7510/pancakeswap-free/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer YOUR_API_KEY`, // Add API key if needed
       },
       body: JSON.stringify({
         query: `{
