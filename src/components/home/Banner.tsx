@@ -46,7 +46,7 @@ const Banner = () => {
                 )}
               </div> */}
               <div className="banner-content text-center banner-sub-title">
-                Token Launch on the 29th of November, 2024
+                Token Launch on the 3rd of December, 2024
               </div>
             </div>
           </div>
