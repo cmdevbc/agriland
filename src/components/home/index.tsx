@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <Buy />
+      {/* <Buy /> */}
       {/*<Contribution />*/}
       <FeatureOne />
       <RoadMapArea />

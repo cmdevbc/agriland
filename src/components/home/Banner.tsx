@@ -38,17 +38,15 @@ const Banner = () => {
                 <br /> <span>Seed the Future with Agriland Token</span>
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
-              <div className="banner-countdown-wrap">
+              {/* <div className="banner-countdown-wrap">
                 {timestamp > 0 && (
                   <div className="coming-time">
                     <CountdownClock endTimestamp={timestamp} />
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="banner-content text-center banner-sub-title">
-                Countdown Until Round{" "}
-                {currentRound != null ? currentRound : undefined}{" "}
-                {isEndTimeStamp ? "Ends" : "Starts"}
+                Token Launch on the 29th of November, 2024
               </div>
             </div>
           </div>
