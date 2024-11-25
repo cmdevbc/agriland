@@ -59,10 +59,12 @@
 
 .pancakeSwapBtn {
   margin: 1.5rem 0;
-  background: linear-gradient(286deg,
-      var(--tg-primary-color) 0,
-      var(--tg-green) 87.6%,
-      var(--tg-black) 109.23%);
+  background: linear-gradient(
+    286deg,
+    var(--tg-primary-color) 0,
+    var(--tg-green) 87.6%,
+    var(--tg-black) 109.23%
+  );
   color: #fff;
   font-size: 1.2rem;
   width: -moz-fit-content;
@@ -73,6 +75,41 @@
   cursor: pointer;
   width: 10.5rem;
   margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.buttons {
+  border-radius: 4px;
+  outline: 1px solid #35855b;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-right: 1rem;
+}
+.buttons > button {
+  background-color: transparent;
+  width: 5rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+.activeBtn {
+  color: #fff;
+  background: linear-gradient(
+    286deg,
+    var(--tg-primary-color) 0,
+    var(--tg-green) 87.6%,
+    var(--tg-black) 109.23%
+  ) !important;
 }
 
 @media only screen and (max-width: 1400px) and (min-width: 800px) {

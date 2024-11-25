@@ -8,7 +8,7 @@ let lastUpdate = {
 };
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
-export async function GET() {
+export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "hourly"; // Default to 'hourly'
 
@@ -29,7 +29,7 @@ export async function GET() {
                 skip: 0,
                 orderBy: date,
                 orderDirection: desc,
-                where: { pairAddress: "0xF31cb18759FE8356348c81268b859d2a32bf2117" }
+                where: { pairAddress: "0x7eD5978d6FC0B26144b12D2BF9Da8397A3Ba7548" }
               ) {
                 pairAddress {
                   id
@@ -53,7 +53,7 @@ export async function GET() {
                 skip: 0,
                 orderBy: hourStartUnix,
                 orderDirection: desc,
-                where: { pair: "0xF31cb18759FE8356348c81268b859d2a32bf2117" }
+                where: { pair: "0x7eD5978d6FC0B26144b12D2BF9Da8397A3Ba7548" }
               ) {
                 pair {
                   id
@@ -65,6 +65,8 @@ export async function GET() {
               }
             }
           `;
+
+    console.log("query", query);
 
     const response = await fetch(
       "https://open-platform.nodereal.io/67cab1fd2af841e6a89015375cdb7510/pancakeswap-free/graphql",

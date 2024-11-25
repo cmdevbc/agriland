@@ -5,17 +5,15 @@ import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
 import useStats from "@/hooks/useStats";
 import { ConnectWallet } from "@thirdweb-dev/react";
-import {
-  useAddress,
-} from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
 import { useAppContext } from "@/context/AppContext";
 import useTokenBalance from "@/hooks/useTokenBalance";
 
 const Banner = () => {
   const { currentRound, startTimestamp, endTimestamp } = useStats();
   const connectedAddress = useAddress();
-  const {tokenPrice} = useAppContext();
-  const {amountFetched,totalAgriTokenBought} = useTokenBalance()
+  const { tokenPrice } = useAppContext();
+  const { amountFetched, totalAgriTokenBought } = useTokenBalance();
   let timestamp = 0;
   let isEndTimeStamp = false;
   if (startTimestamp && endTimestamp) {
@@ -32,12 +30,12 @@ const Banner = () => {
     }
   }
 
-  const getTotalValue = ()=>{
-    if(!tokenPrice || !amountFetched){
-      return ;
+  const getTotalValue = () => {
+    if (!tokenPrice || !amountFetched) {
+      return;
     }
-    return  (Number(totalAgriTokenBought)*Number(tokenPrice)).toFixed(2);
-  }
+    return (Number(totalAgriTokenBought) * Number(tokenPrice)).toFixed(2);
+  };
 
   return (
     <section
@@ -65,29 +63,34 @@ const Banner = () => {
                 {currentRound != null ? currentRound : undefined}{" "}
                 {isEndTimeStamp ? "Ends" : "Starts"}
               </div> */}
-             {connectedAddress ? 
-             <>
-          
-             <div className="token-acquired-title">
-              Your $ALT Balance
-              </div>
-              <div>
-                
-                {  getTotalValue() ?
+              {connectedAddress ? (
                 <>
-                  <span className="token-acquired">{totalAgriTokenBought} ALT </span> {getTotalValue() ?<span  className="equivalent-usd">{`(~ $${getTotalValue()})`}</span>:<></> }
-                </>:
-                <> </>
-                }
-               
-              </div>
-              </>
-             :  <div className={"banner-connectBtn"}>
-               <ConnectWallet
-                            modalTitleIconUrl="/assets/img/banner/logo.png"
-                            modalTitle="AGRILAND"
-                          />
-              </div>}
+                  <div className="token-acquired-title">Your $ALT Balance</div>
+                  <div>
+                    {getTotalValue() ? (
+                      <>
+                        <span className="token-acquired">
+                          {totalAgriTokenBought} ALT{" "}
+                        </span>{" "}
+                        {getTotalValue() ? (
+                          <span className="equivalent-usd">{`(~ $${getTotalValue()})`}</span>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    ) : (
+                      <> </>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <div className={"banner-connectBtn"}>
+                  <ConnectWallet
+                    modalTitleIconUrl="/assets/img/banner/logo.png"
+                    modalTitle="AGRILAND"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

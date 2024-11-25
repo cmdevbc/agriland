@@ -9,9 +9,18 @@ export const AppContextProvider = ({ children }) => {
 
   const [graphData, setGraphData] = useState([]);
 
+  const [graphType, setGraphType] = useState("hourly"); // hourly/daily
+
   return (
     <AppContext.Provider
-      value={{ tokenPrice, setTokenPrice, setGraphData, graphData }}
+      value={{
+        tokenPrice,
+        setTokenPrice,
+        setGraphData,
+        graphData,
+        graphType,
+        setGraphType,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -50,35 +50,17 @@ function getMinMax(data: [number, string][]) {
 }
 
 function Graph({}: Props) {
-  const { graphData } = useAppContext();
-
-  const transformedData = graphData
-    .map(
-      (item: {
-        hourStartUnix: Number;
-        reserve0: string;
-        reserve1: string;
-      }) => ({
-        time: item.hourStartUnix,
-        value: (parseFloat(item.reserve0) / parseFloat(item.reserve1)).toFixed(
-          6
-        ), // Adjust decimal places as needed
-      })
-    )
-    .sort((a: any, b: any) => a.time - b.time);
+  const { graphData, graphType, setGraphType } = useAppContext();
 
   const mockGraphData: any = {
-    coordinates: transformedData,
+    coordinates: graphData,
   };
 
-  console.log("mockGraphData", mockGraphData);
   const mockLabels = mockGraphData.coordinates.map((coord: any) => coord?.time);
   const mockValues = mockGraphData.coordinates.map(
     (coord: any) => coord?.value
   );
 
-  console.log("mockLabels", mockLabels);
-  console.log("mockValues", mockValues);
   const dataset = useMemo(() => {
     return mockGraphData.coordinates.map((item: any) =>
       parseFloat(item?.value)
@@ -91,8 +73,6 @@ function Graph({}: Props) {
 
   const { min, max } = getMinMax(mockGraphData.coordinates);
 
-  console.log("Lowest value:", min);
-  console.log("Highest value:", max);
   const diffValue = max - min;
   const offsetValueForGraph = diffValue * 0.15;
 
@@ -116,8 +96,6 @@ function Graph({}: Props) {
     },
     scales: {
       x: {
-        // min: mockLabels[mockLabels.length - 500], // Show only the last 15 days initially
-        // max: mockLabels[mockLabels.length - 1],
         ticks: {
           callback: (value: any, index: number) => {
             if (index % stepSize === 0) {
@@ -212,15 +190,40 @@ function Graph({}: Props) {
     ],
   };
 
-  console.log("data", data);
   const DataGraph = () => {
     // @ts-ignore
     return <Line options={options} data={data} />;
   };
 
+  const goToDailyGraph = () => {
+    setGraphType("daily");
+  };
+
+  const goToHourlyGraph = () => {
+    setGraphType("hourly");
+  };
+
   return (
     <>
-      <h2 className={styles.graphTitle}>Live $ALT Price</h2>
+      <div className={styles.header}>
+        <h2 className={styles.graphTitle}>Live $ALT Price</h2>
+
+        <div className={styles.buttons}>
+          <button
+            onClick={goToHourlyGraph}
+            className={graphType === "hourly" ? styles.activeBtn : ""}
+          >
+            Hourly
+          </button>
+          <button
+            onClick={goToDailyGraph}
+            className={graphType === "daily" ? styles.activeBtn : ""}
+          >
+            Daily
+          </button>
+        </div>
+      </div>
+
       <DataGraph />
     </>
   );

@@ -13,11 +13,13 @@ const Graph = dynamic(() => import("./Graph"), {
 });
 
 function LiveData() {
-  const { fetchHourlyData, fetchDailyData } = usePrice();
+  const { graphType } = useAppContext();
+
+  const { fetchGraphData } = usePrice();
 
   useEffect(() => {
-    fetchHourlyData();
-  }, []);
+    fetchGraphData();
+  }, [graphType]);
 
   return (
     <div className={styles.wrap}>
