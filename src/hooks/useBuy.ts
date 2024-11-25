@@ -39,7 +39,7 @@ const useBuy = () => {
   const { contract } = useContract(contractAddress, abi);
   const { contract: usdtContract } = useContract(usdtContractAddress, erc20Abi);
   ////////
-  
+
   const {
     data: _userTotalBoughtAgri,
     isSuccess: isSuccessUserTotalBoughtAgri,

@@ -6,15 +6,15 @@ type Props = {};
 function usePrice() {
   const { setGraphData, setTokenPrice } = useAppContext();
 
-  const fetchAPI = async () => {
+  const fetchHourlyData = async () => {
     try {
-      const res = await fetch("/api/prices");
+      const res = await fetch("/api/prices/?type=hourly");
       const data = await res.json();
 
       let _graphData = data?.data?.pairHourDatas;
       setGraphData(_graphData);
       let _latestPrice =
-        Number(_graphData[0].reserve1) / Number(_graphData[0].reserve0);
+        Number(_graphData[0].reserve0) / Number(_graphData[0].reserve1);
       setTokenPrice(_latestPrice);
       console.log("data is", _graphData);
     } catch (err) {
@@ -22,11 +22,22 @@ function usePrice() {
     }
   };
 
-  useEffect(() => {
-    fetchAPI();
-  }, []);
+  const fetchDailyData = async () => {
+    try {
+      const res = await fetch("/api/prices/?type=daily");
+      const data = await res.json();
+      let _graphData = data?.data?.pairHourDatas;
+      setGraphData(_graphData);
+      // let _latestPrice =
+      //   Number(_graphData[0].reserve0) / Number(_graphData[0].reserve1);
+      // setTokenPrice(_latestPrice);
+      console.log("data is", _graphData);
+    } catch (err) {
+      console.log("error fetching pricecs", err);
+    }
+  };
 
-  return {};
+  return { fetchHourlyData, fetchDailyData };
 }
 
 export default usePrice;

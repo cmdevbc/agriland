@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./livedata.module.css";
 // import Graph from "./Graph";
 import TokenDetails from "./TokenDetails";
@@ -13,7 +13,11 @@ const Graph = dynamic(() => import("./Graph"), {
 });
 
 function LiveData() {
-  usePrice();
+  const { fetchHourlyData, fetchDailyData } = usePrice();
+
+  useEffect(() => {
+    fetchHourlyData();
+  }, []);
 
   return (
     <div className={styles.wrap}>

@@ -52,10 +52,6 @@ function getMinMax(data: [number, string][]) {
 function Graph({}: Props) {
   const { graphData } = useAppContext();
 
-  if (!graphData || graphData.length === 0) {
-    return <div style={{ textAlign: "center" }}>Loading...</div>; // Show a loading message or spinner
-  }
-
   const transformedData = graphData
     .map(
       (item: {
@@ -64,7 +60,7 @@ function Graph({}: Props) {
         reserve1: string;
       }) => ({
         time: item.hourStartUnix,
-        value: (parseFloat(item.reserve1) / parseFloat(item.reserve0)).toFixed(
+        value: (parseFloat(item.reserve0) / parseFloat(item.reserve1)).toFixed(
           6
         ), // Adjust decimal places as needed
       })
@@ -88,6 +84,10 @@ function Graph({}: Props) {
       parseFloat(item?.value)
     );
   }, [mockGraphData.coordinates]);
+
+  if (!graphData || graphData.length === 0) {
+    return <div style={{ textAlign: "center" }}>Loading...</div>; // Show a loading message or spinner
+  }
 
   const { min, max } = getMinMax(mockGraphData.coordinates);
 
