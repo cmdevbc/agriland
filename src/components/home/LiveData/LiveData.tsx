@@ -4,29 +4,25 @@ import styles from "./livedata.module.css";
 // import Graph from "./Graph";
 import TokenDetails from "./TokenDetails";
 import { useAppContext } from "@/context/AppContext";
-import dynamic from 'next/dynamic';
-import usePrice from "@/app/hooks/usePrice";
+import dynamic from "next/dynamic";
+import usePrice from "@/hooks/usePrice";
 
-const Graph = dynamic(() => import('./Graph'), {
-  ssr: false, 
-  loading: () => <p  style={{textAlign:"center"}}>Loading...</p>,
+const Graph = dynamic(() => import("./Graph"), {
+  ssr: false,
+  loading: () => <p style={{ textAlign: "center" }}>Loading...</p>,
 });
 
-
 function LiveData() {
-
   usePrice();
 
   return (
     <div className={styles.wrap}>
- 
-<div className={styles.graph}>
-
-      <Graph />
-</div>
+      <div className={styles.graph}>
+        <Graph />
+      </div>
 
       <div className={styles.tokenDetails}>
-      <TokenDetails />
+        <TokenDetails />
       </div>
     </div>
   );

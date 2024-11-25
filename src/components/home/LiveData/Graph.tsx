@@ -13,11 +13,13 @@ import {
 import { Line } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 import styles from "./livedata.module.css";
-import { convertToTime, showTimeLabel } from "@/utils/dateandtime";
-
-type GraphData = {
-  coordinates: [number, string][];
-};
+import {
+  convertToTime,
+  showDateLabel,
+  showTimeLabel,
+} from "@/utils/dateandtime";
+import { useAppContext } from "@/context/AppContext";
+import { isEmpty } from "rxjs";
 
 // Register Chart.js components only once
 ChartJS.register(
@@ -32,9 +34,13 @@ ChartJS.register(
 );
 type Props = {};
 function getMinMax(data: [number, string][]) {
+  if (!data || data.length === 0) {
+    return { min: 0, max: 0 }; // Return object for consistency
+  }
+
   return data.reduce(
-    (acc, [_, value]) => {
-      const numValue = parseFloat(value);
+    (acc, item: any) => {
+      const numValue = parseFloat(item?.value);
       acc.min = Math.min(acc.min, numValue);
       acc.max = Math.max(acc.max, numValue);
       return acc;
@@ -43,70 +49,86 @@ function getMinMax(data: [number, string][]) {
   );
 }
 
-function generateCryptoData() {
-  const startTime = Math.floor(Date.now() / 1000); // current time in seconds
-  const dataPoints = 50; // total data points
-  const interval = 12 * 10; // 12 minutes in seconds
+function Graph({}: Props) {
+  const { graphData } = useAppContext();
 
-  const cryptoData: [number, string][] = Array.from(
-    { length: dataPoints },
-    (_, i) => {
-      const time = startTime + i * interval; // increment time by 12 minutes for each data point
-      const value = (Math.random() * 0.3 + 0.15).toFixed(6); // random value between 0.2 and 0.5
-      return [time, value];
-    }
+  if (!graphData || graphData.length === 0) {
+    return <div style={{ textAlign: "center" }}>Loading...</div>; // Show a loading message or spinner
+  }
+
+  const transformedData = graphData
+    .map(
+      (item: {
+        hourStartUnix: Number;
+        reserve0: string;
+        reserve1: string;
+      }) => ({
+        time: item.hourStartUnix,
+        value: (parseFloat(item.reserve1) / parseFloat(item.reserve0)).toFixed(
+          6
+        ), // Adjust decimal places as needed
+      })
+    )
+    .sort((a: any, b: any) => a.time - b.time);
+
+  const mockGraphData: any = {
+    coordinates: transformedData,
+  };
+
+  console.log("mockGraphData", mockGraphData);
+  const mockLabels = mockGraphData.coordinates.map((coord: any) => coord?.time);
+  const mockValues = mockGraphData.coordinates.map(
+    (coord: any) => coord?.value
   );
 
-  return cryptoData;
-}
-
-
-function Graph({}: Props) {
-  const mockGraphData: GraphData = {
-    coordinates: generateCryptoData(),
-  };
-  const mockLabels = mockGraphData.coordinates.map((coord) => coord[0]);
-  const mockValues = mockGraphData.coordinates.map((coord) => coord[1]);
-
+  console.log("mockLabels", mockLabels);
+  console.log("mockValues", mockValues);
   const dataset = useMemo(() => {
-    return mockGraphData.coordinates.map((item) => parseFloat(item[1]));
+    return mockGraphData.coordinates.map((item: any) =>
+      parseFloat(item?.value)
+    );
   }, [mockGraphData.coordinates]);
 
   const { min, max } = getMinMax(mockGraphData.coordinates);
 
-console.log("Lowest value:", min);
-console.log("Highest value:", max);
-const diffValue = max- min;
-const offsetValueForGraph = diffValue*0.15;
+  console.log("Lowest value:", min);
+  console.log("Highest value:", max);
+  const diffValue = max - min;
+  const offsetValueForGraph = diffValue * 0.15;
 
   const numOfDataPoints = mockGraphData.coordinates.length;
-  
-  const numOfTicks = 6;
+
+  const numOfTicks = 10;
 
   const stepSize = Math.max(Math.floor(numOfDataPoints / numOfTicks), 1);
   let zoomLevel = 1;
   // @ts-ignore
+
+  const INITIAL_DISPLAY_COUNT = Math.floor(mockLabels.length / 2);
+
   const options = {
     responsive: true,
     maintainAspectRatio: true,
     aspectRatio: 5 / 1,
     onResize: (chart: any, size: any) => {
-      chart.options.aspectRatio = size.width <= 600 ? 1/1 : 9 / 4;
+      chart.options.aspectRatio = size.width <= 600 ? 1 / 1 : 9 / 4;
       chart.update();
     },
     scales: {
       x: {
+        // min: mockLabels[mockLabels.length - 500], // Show only the last 15 days initially
+        // max: mockLabels[mockLabels.length - 1],
         ticks: {
           callback: (value: any, index: number) => {
             if (index % stepSize === 0) {
-              return showTimeLabel(mockLabels[index]);
+              return showDateLabel(mockLabels[index]);
             }
           },
         },
       },
       y: {
-        min: min-offsetValueForGraph,
-        max: max+offsetValueForGraph,
+        min: min - offsetValueForGraph,
+        max: max + offsetValueForGraph,
         position: "right",
         title: {
           display: true,
@@ -116,6 +138,10 @@ const offsetValueForGraph = diffValue*0.15;
     },
     plugins: {
       zoom: {
+        pan: {
+          enabled: true, // Allow panning
+          mode: "x", // Enable panning along the x-axis
+        },
         zoom: {
           wheel: {
             enabled: true,
@@ -135,6 +161,8 @@ const offsetValueForGraph = diffValue*0.15;
         },
       },
       tooltip: {
+        intersect: false,
+        mode: "nearest",
         callbacks: {
           title: (tooltipItems: any) =>
             convertToTime(mockLabels[tooltipItems[0].dataIndex]),
@@ -176,22 +204,24 @@ const offsetValueForGraph = diffValue*0.15;
           gradient.addColorStop(1, "#35855B"); // Top color
           return gradient;
         },
+        pointRadius: 0,
         borderColor: "#35855B",
+        borderWidth: 2,
         tension: 0.4, // This makes the line smooth and curved
       },
     ],
   };
 
-
-  const DataGraph = (() => {
+  console.log("data", data);
+  const DataGraph = () => {
     // @ts-ignore
     return <Line options={options} data={data} />;
-  });
+  };
 
   return (
     <>
       <h2 className={styles.graphTitle}>Live $ALT Price</h2>
-      <DataGraph/>
+      <DataGraph />
     </>
   );
 }

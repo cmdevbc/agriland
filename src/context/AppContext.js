@@ -1,22 +1,18 @@
-"use client"; 
+"use client";
 
-import React, { createContext, useState,useContext } from 'react';
+import React, { createContext, useState, useContext } from "react";
 
+const AppContext = createContext();
 
-const defaultContextValue = {
-  tokenPrice: 0,
-  setTokenPrice: () => {},
-};
-
-// Create the context
- const AppContext = createContext();
-
-// Context provider component
-export const AppContextProvider= ({ children }) => {
+export const AppContextProvider = ({ children }) => {
   const [tokenPrice, setTokenPrice] = useState(0);
 
+  const [graphData, setGraphData] = useState([]);
+
   return (
-    <AppContext.Provider value={{ tokenPrice, setTokenPrice }}>
+    <AppContext.Provider
+      value={{ tokenPrice, setTokenPrice, setGraphData, graphData }}
+    >
       {children}
     </AppContext.Provider>
   );
