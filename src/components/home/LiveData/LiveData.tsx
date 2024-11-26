@@ -19,6 +19,13 @@ function LiveData() {
 
   useEffect(() => {
     fetchGraphData();
+
+    // Set up interval for every 5 minutes
+    const intervalId = setInterval(() => {
+      fetchGraphData();
+    }, 300000);
+
+    return () => clearInterval(intervalId);
   }, [graphType]);
 
   return (
