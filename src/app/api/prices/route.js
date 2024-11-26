@@ -6,7 +6,7 @@ let lastUpdate = {
   hourly: 0,
   daily: 0,
 };
-const CACHE_DURATION = 15 * 60 * 1000; // 10 minutes
+const CACHE_DURATION = 20 * 60 * 1000; // 20 minutes
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -14,7 +14,6 @@ export async function GET(req) {
 
   const now = Date.now();
 
-  // Serve cached data if still valid
   if (cachedData[type] && now - lastUpdate[type] < CACHE_DURATION) {
     return Response.json(cachedData[type]); // Serve from cache
   }
@@ -67,7 +66,7 @@ export async function GET(req) {
           `;
 
     const response = await fetch(
-      "https://open-platform.nodereal.io/67cab1fd2af841e6a89015375cdb7510/pancakeswap-free/graphql",
+      `https://open-platform.nodereal.io/${process.env.NEXT_PUBLIC_NODEREAL_KEY}/pancakeswap-free/graphql`,
       {
         method: "POST",
         headers: {
@@ -82,8 +81,8 @@ export async function GET(req) {
     }
 
     const data = await response.json();
-    cachedData = data; // Update cache
-    lastUpdate = now;
+    cachedData[type] = data; // Update cache
+    lastUpdate[type] = now;
 
     return Response.json(data); // Send data to frontend
   } catch (error) {
