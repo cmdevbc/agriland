@@ -14,10 +14,13 @@ type Props = {};
 function TokenDetails({}: Props) {
   const { addToken } = useBuy();
   const { tokenPrice, setTokenPrice } = useAppContext();
-  const tokenAddress  = token?.address;
-  const _goToSwap = ()=>{
-    window.open(`https://pancakeswap.finance/?chain=bsc&outputCurrency=${tokenAddress}`,"_blank")
-  }
+  const tokenAddress = token?.address;
+  const _goToSwap = () => {
+    window.open(
+      `https://pancakeswap.finance/?chain=bsc&outputCurrency=${tokenAddress}`,
+      "_blank"
+    );
+  };
   return (
     <>
       <div className={styles.tokenD}>
@@ -25,9 +28,11 @@ function TokenDetails({}: Props) {
           <Image src={logo} width="50" height="50" alt="Logo" />
         </div>
 
-        <div className={styles.price}>${tokenPrice?.toFixed(2)}</div>
+        <div className={styles.price}>${tokenPrice?.toFixed(3)}</div>
       </div>
-      <div className={styles.pancakeSwapBtn} onClick={_goToSwap}>Buy / Sell</div>
+      <div className={styles.pancakeSwapBtn} onClick={_goToSwap}>
+        Buy / Sell
+      </div>
 
       <div className={styles.add} onClick={addToken}>
         Add $ALT to Wallet

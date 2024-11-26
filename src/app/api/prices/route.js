@@ -6,7 +6,7 @@ let lastUpdate = {
   hourly: 0,
   daily: 0,
 };
-const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
+const CACHE_DURATION = 15 * 60 * 1000; // 10 minutes
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -65,8 +65,6 @@ export async function GET(req) {
               }
             }
           `;
-
-    console.log("query", query);
 
     const response = await fetch(
       "https://open-platform.nodereal.io/67cab1fd2af841e6a89015375cdb7510/pancakeswap-free/graphql",

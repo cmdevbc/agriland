@@ -105,8 +105,10 @@ function Graph({}: Props) {
         },
       },
       y: {
-        min: min - offsetValueForGraph,
-        max: max + offsetValueForGraph,
+        min: 0,
+        max: 5,
+        // min: min - offsetValueForGraph,
+        // max: max + offsetValueForGraph,
         position: "right",
         title: {
           display: true,
@@ -147,7 +149,7 @@ function Graph({}: Props) {
           label: (context: any) => {
             const label = context.dataset.label;
             if (label === "ALT") {
-              return `$ALT: $${dataset[context.dataIndex].toFixed(2)}`;
+              return `$ALT: $${dataset[context.dataIndex].toFixed(3)}`;
             }
           },
         },
