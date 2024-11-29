@@ -30,9 +30,9 @@ function TokenDetails({}: Props) {
 
         <div className={styles.price}>${tokenPrice?.toFixed(3)}</div>
       </div>
-      <div className={styles.pancakeSwapBtn} onClick={_goToSwap}>
+      {/* <div className={styles.pancakeSwapBtn} onClick={_goToSwap}>
         Buy / Sell
-      </div>
+      </div> */}
 
       <div className={styles.add} onClick={addToken}>
         Add $ALT to Wallet
