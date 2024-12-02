@@ -10,7 +10,6 @@ function usePrice() {
   const fillRemainingData = (_data: any[], timer: number) => {
     const filledData = [];
 
-    console.log("_data", _data);
     for (let i = 0; i < _data.length - 1; i++) {
       const current = _data[i];
       const next = _data[i + 1];
@@ -34,7 +33,6 @@ function usePrice() {
     // Push the last data point
     filledData.push({ ..._data[_data.length - 1] });
 
-    console.log("filledData", filledData);
     setGraphData(filledData);
   };
 
@@ -49,16 +47,15 @@ function usePrice() {
         }) => ({
           time: _type == "daily" ? item.date : item.hourStartUnix,
           value: (
-            parseFloat(item.reserve0) / parseFloat(item.reserve1)
+            parseFloat(item.reserve1) / parseFloat(item.reserve0)
           ).toFixed(6), // Adjust decimal places as needed
         })
       )
       .sort((a: any, b: any) => a.time - b.time);
     if (_type == "daily") {
-      console.log("daily");
       fillRemainingData(_transformedData, 86400);
     } else {
-      let _latestPrice = Number(_data[0].reserve0) / Number(_data[0].reserve1);
+      let _latestPrice = Number(_data[0].reserve1) / Number(_data[0].reserve0);
       setTokenPrice(_latestPrice);
 
       fillRemainingData(_transformedData, 3600);

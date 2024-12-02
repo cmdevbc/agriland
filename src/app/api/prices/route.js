@@ -12,6 +12,8 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "hourly"; // Default to 'hourly'
 
+  const pairAddress = "0x3938faecd0f93572314654d4ed862969bb5cb6bc";
+
   const now = Date.now();
 
   if (cachedData[type] && now - lastUpdate[type] < CACHE_DURATION) {
@@ -28,7 +30,7 @@ export async function GET(req) {
                 skip: 0,
                 orderBy: date,
                 orderDirection: desc,
-                where: { pairAddress: "0x7eD5978d6FC0B26144b12D2BF9Da8397A3Ba7548" }
+                where: { pairAddress: "${pairAddress}" }
               ) {
                 pairAddress {
                   id
@@ -52,7 +54,7 @@ export async function GET(req) {
                 skip: 0,
                 orderBy: hourStartUnix,
                 orderDirection: desc,
-                where: { pair: "0x7eD5978d6FC0B26144b12D2BF9Da8397A3Ba7548" }
+                where: { pair: "${pairAddress}" }
               ) {
                 pair {
                   id
