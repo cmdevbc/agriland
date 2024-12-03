@@ -32,7 +32,7 @@ function usePrice() {
 
     // Push the last data point
     filledData.push({ ..._data[_data.length - 1] });
-
+    console.log("filledData", filledData);
     setGraphData(filledData);
   };
 
@@ -68,6 +68,17 @@ function usePrice() {
       const data = await res.json();
       let _graphData = data?.data?.pairHourDatas;
       transformAndSaveData(_graphData, "hourly");
+
+      // let _temp = {
+      //   pair: {
+      //     id: "0x3938fAecD0f93572314654D4ED862969BB5cB6BC",
+      //     name: "ALT-USDT",
+      //   },
+      //   hourStartUnix: 1733126400,
+      //   reserve0: "513.296062945111068",
+      //   reserve1: "719.32782629263928497",
+      // };
+      // transformAndSaveData([..._graphData, _temp], "hourly");
     } catch (err) {
       console.log("error fetching pricecs", err);
     }
@@ -78,6 +89,7 @@ function usePrice() {
       const res = await fetch("/api/prices/?type=daily");
       const data = await res.json();
       let _graphData = data?.data?.pairDayDatas;
+
       transformAndSaveData(_graphData, "daily");
     } catch (err) {
       console.log("error fetching pricecs", err);
