@@ -1,0 +1,168 @@
+.graphWrap {
+  /* flex-grow: 1; */
+}
+
+.graph {
+  width: 50% !important;
+  flex: 1;
+}
+
+.tokenDetails {
+  flex: none;
+  width: 20%;
+  max-width: 250px;
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #010314;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  gap: 3.5rem;
+}
+
+.graphTitle {
+  font-family: var(--tg-heading-font-family);
+  /* color: var(--tg-heading-font-color); */
+  opacity: 0.8;
+  margin: 0;
+}
+
+.tokenD {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.add {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #1c1d34;
+  padding: 0.5rem 1rem;
+  width: 10.5rem;
+  text-align: center;
+  margin-top: 1.2rem;
+}
+
+.add:hover {
+  background: #35855b;
+}
+
+.pancakeSwapBtn {
+  margin: 1.5rem 0;
+  background: linear-gradient(
+    286deg,
+    var(--tg-primary-color) 0,
+    var(--tg-green) 87.6%,
+    var(--tg-black) 109.23%
+  );
+  color: #fff;
+  font-size: 1.2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.25rem 2.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #17271a;
+  cursor: pointer;
+  width: 10.5rem;
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.buttons {
+  border-radius: 4px;
+  outline: 1px solid #35855b;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-right: 1rem;
+}
+.buttons > button {
+  background-color: transparent;
+  width: 5rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+.activeBtn {
+  color: #fff;
+  background: linear-gradient(
+    286deg,
+    var(--tg-primary-color) 0,
+    var(--tg-green) 87.6%,
+    var(--tg-black) 109.23%
+  ) !important;
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 800px) {
+  .wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .wrap {
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 0;
+  }
+
+  .tokenDetails {
+    width: fit-content;
+  }
+
+  .graphTitle {
+    font-size: 1.75rem;
+  }
+
+  .graph {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .wrap {
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+  }
+
+  .graphTitle {
+    font-size: 1.5rem;
+  }
+
+  .graph > div {
+    /* padding-top: 10rem; */
+  }
+
+  /* .header{
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  } */
+  .buttons > button {
+    font-size: 0.75rem;
+    width: 4rem;
+  }
+}

@@ -4,25 +4,39 @@ import Image from "next/image";
 import bannerShape_1 from "@/assets/img/banner/farm1.png";
 import bannerShape_2 from "@/assets/img/banner/farm2.png";
 import useStats from "@/hooks/useStats";
+import { ConnectWallet } from "@thirdweb-dev/react";
+import { useAddress } from "@thirdweb-dev/react";
+import { useAppContext } from "@/context/AppContext";
+import useTokenBalance from "@/hooks/useTokenBalance";
+import { timerEndTimeStamp } from "@/constant/constant";
 
 const Banner = () => {
-  const { currentRound, startTimestamp, endTimestamp } = useStats();
+  // const { currentRound, startTimestamp, endTimestamp } = useStats();
 
-  let timestamp = 0;
+  const connectedAddress = useAddress();
+  const { tokenPrice } = useAppContext();
+  const { amountFetched, totalAgriTokenBought } = useTokenBalance();
   let isEndTimeStamp = false;
-  if (startTimestamp && endTimestamp) {
-    const t0 = Date.now();
-    const t1 = parseInt(startTimestamp) * 1000;
-    const t2 = parseInt(endTimestamp) * 1000;
 
-    if (t0 < t1) {
-      timestamp = t1;
+  if (timerEndTimeStamp) {
+    const t0 = Date.now();
+    const t2 = timerEndTimeStamp;
+
+    // console.log("t0", t0);
+
+    if (t0 < t2) {
       isEndTimeStamp = false;
-    } else if (t0 < t2) {
-      timestamp = t2;
+    } else {
       isEndTimeStamp = true;
     }
   }
+
+  const getTotalValue = () => {
+    if (!tokenPrice || !amountFetched) {
+      return;
+    }
+    return (Number(totalAgriTokenBought) * Number(tokenPrice)).toFixed(2);
+  };
 
   return (
     <section
@@ -38,16 +52,48 @@ const Banner = () => {
                 <br /> <span>Seed the Future with Agriland Token</span>
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
-              {/* <div className="banner-countdown-wrap">
-                {timestamp > 0 && (
-                  <div className="coming-time">
-                    <CountdownClock endTimestamp={timestamp} />
+
+              {connectedAddress ? (
+                <>
+                  <div className="token-acquired-title">Your $ALT Balance</div>
+                  <div>
+                    {getTotalValue() ? (
+                      <>
+                        <span className="token-acquired">
+                          {totalAgriTokenBought} ALT{" "}
+                        </span>{" "}
+                        {getTotalValue() ? (
+                          <span className="equivalent-usd">{`(~ $${getTotalValue()})`}</span>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    ) : (
+                      <> </>
+                    )}
                   </div>
-                )}
-              </div> */}
-              <div className="banner-content text-center banner-sub-title">
-                Token Launch on the 3rd of December, 2024
-              </div>
+                </>
+              ) : (
+                <div className={"banner-connectBtn"}>
+                  <ConnectWallet
+                    modalTitleIconUrl="/assets/img/banner/logo.png"
+                    modalTitle="AGRILAND"
+                  />
+                </div>
+              )}
+
+              {timerEndTimeStamp && !isEndTimeStamp && (
+                <>
+                  <div className="banner-countdown-wrap">
+                    <div className="coming-time">
+                      <CountdownClock endTimestamp={timerEndTimeStamp} />
+                    </div>
+                  </div>
+                  <div className="banner-content text-center banner-sub-title">
+                    Countdown to Binance, OKX and MEXC listing AGRI
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

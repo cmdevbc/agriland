@@ -9,6 +9,7 @@ import FeatureOne from "./FeatureOne";
 import FeatureTwo from "./FeatureTwo";
 import RoadMapArea from "./RoadMapArea";
 import Team from "./Team";
+import LiveData from "./LiveData/LiveData";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Banner />
       {/* <Buy /> */}
       {/*<Contribution />*/}
+      <LiveData />
       <FeatureOne />
       <RoadMapArea />
     </>

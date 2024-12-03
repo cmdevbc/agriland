@@ -17,12 +17,12 @@ const menu_data: MenuItem[] = [
     title: "Home",
     link: "/",
   },
-  // {
-  //   id: 2,
-  //   has_dropdown: false,
-  //   title: "BUY $ALT",
-  //   link: "/#buy",
-  // },
+  {
+    id: 2,
+    has_dropdown: false,
+    title: "LIVE $ALT",
+    link: "/#live",
+  },
   {
     id: 3,
     has_dropdown: false,

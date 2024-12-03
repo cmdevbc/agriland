@@ -39,10 +39,12 @@ const useBuy = () => {
   const { contract } = useContract(contractAddress, abi);
   const { contract: usdtContract } = useContract(usdtContractAddress, erc20Abi);
   ////////
+
   const {
     data: _userTotalBoughtAgri,
     isSuccess: isSuccessUserTotalBoughtAgri,
   } = useContractRead(contract, "userTotalBoughtAgri", [address]);
+
   const { data: requiredAgri } = useContractRead(contract, "getAgriByBNB", [
     Number(amount) > 0 ? toWei(Number(amount)) : 0,
   ]);
@@ -206,6 +208,7 @@ const useBuy = () => {
           address: token.address,
           symbol: token.symbol,
           decimals: 18,
+          image: token.image,
         },
       },
     });
