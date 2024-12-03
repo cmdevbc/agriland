@@ -22,7 +22,7 @@ const Banner = () => {
     const t0 = Date.now();
     const t2 = timerEndTimeStamp;
 
-    console.log("t0", t0);
+    // console.log("t0", t0);
 
     if (t0 < t2) {
       isEndTimeStamp = false;

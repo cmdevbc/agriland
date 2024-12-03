@@ -29,7 +29,7 @@ function LiveData() {
   }, [graphType]);
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} id="live">
       <div className={styles.graph}>
         <Graph />
       </div>

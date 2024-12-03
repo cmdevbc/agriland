@@ -32,7 +32,7 @@ function usePrice() {
 
     // Push the last data point
     filledData.push({ ..._data[_data.length - 1] });
-    console.log("filledData", filledData);
+    // console.log("filledData", filledData);
     setGraphData(filledData);
   };
 

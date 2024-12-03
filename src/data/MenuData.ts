@@ -20,8 +20,8 @@ const menu_data: MenuItem[] = [
   {
     id: 2,
     has_dropdown: false,
-    title: "BUY $ALT",
-    link: "/#buy",
+    title: "LIVE $ALT",
+    link: "/#live",
   },
   {
     id: 3,
