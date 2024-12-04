@@ -117,10 +117,14 @@
   .wrap {
     padding-left: 20px;
     padding-right: 20px;
+    gap: 2rem;
+  }
+  .tokenD {
+    font-size: 1.7rem;
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 991.98px) {
   .wrap {
     flex-direction: column;
     padding-left: 2rem;
@@ -138,6 +142,15 @@
 
   .graph {
     width: 100% !important;
+  }
+  .tokenD {
+    justify-content: center;
+  }
+  .tokenDetails {
+    max-width: 100%;
+  }
+  .add {
+    margin: 1rem auto;
   }
 }
 

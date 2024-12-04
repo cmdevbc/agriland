@@ -53,7 +53,7 @@ function TokenDetails({}: Props) {
       {connectedAddress ? (
         <>
           <div className="token-acquired-title">Your $ALT Balance</div>
-          <div>
+          <div className="token-acquired-flex">
             {getTotalValue() ? (
               <>
                 <span className="token-acquired">

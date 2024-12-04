@@ -1103,10 +1103,16 @@ label {
   font-size: 1rem;
   color: #fff;
 }
+.token-acquired-flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+}
 
 .token-acquired,
 .equivalent-usd {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .token-acquired {

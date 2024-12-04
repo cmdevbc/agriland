@@ -47,7 +47,7 @@
 
   .token-acquired,
   .equivalent-usd {
-    font-size: 1rem;
+    font-size: 1.35rem;
   }
 
   .banner-scroll-down {
@@ -494,6 +494,17 @@
   .contact-map iframe {
     border-radius: 0 0 15px 15px;
   }
+  .token-acquired-title {
+    text-align: center;
+  }
+  .token-acquired-flex {
+    justify-content: center;
+  }
+
+  .token-acquired,
+  .equivalent-usd {
+    font-size: 1.15rem;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -920,5 +931,18 @@
 
   .roadmap-item {
     height: auto;
+  }
+
+  .token-acquired-title {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .token-acquired-flex {
+    justify-content: center;
+  }
+
+  .token-acquired,
+  .equivalent-usd {
+    font-size: 1rem;
   }
 }
