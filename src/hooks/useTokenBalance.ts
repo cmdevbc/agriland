@@ -7,8 +7,8 @@ import BigNumber from "bignumber.js";
 type Props = {};
 
 function useTokenBalance() {
-  // const myaddress = useAddress();
-  const address = "0xcc5eCD824E3864c17bf5AD44083E37A8A25b8B2f";
+  const address = useAddress();
+  // const address = "0xcc5eCD824E3864c17bf5AD44083E37A8A25b8B2f";
   let amountFetched = false;
   let totalAgriTokenBought = "";
   const { contract } = useContract(token.address, tokenABI);
