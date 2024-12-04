@@ -9,6 +9,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { useAppContext } from "@/context/AppContext";
 import useTokenBalance from "@/hooks/useTokenBalance";
 import { timerEndTimeStamp } from "@/constant/constant";
+import { numberWithCommas } from "@/utils/utils";
 
 const Banner = () => {
   // const { currentRound, startTimestamp, endTimestamp } = useStats();
@@ -35,7 +36,9 @@ const Banner = () => {
     if (!tokenPrice || !amountFetched) {
       return;
     }
-    return (Number(totalAgriTokenBought) * Number(tokenPrice)).toFixed(2);
+    return numberWithCommas(
+      (Number(totalAgriTokenBought) * Number(tokenPrice)).toFixed(2)
+    );
   };
 
   return (
