@@ -1099,13 +1099,14 @@ label {
 }
 
 .token-acquired-title {
-  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
   color: #fff;
 }
 
 .token-acquired,
 .equivalent-usd {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .token-acquired {
@@ -1149,6 +1150,14 @@ label {
   margin-bottom: 40px;
   color: var(--tg-white);
   font-weight: 500;
+}
+
+.graph-connectBtn button {
+  width: 10.5rem;
+  padding: 0.7rem;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
 }
 
 .coming-time {

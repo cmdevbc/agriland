@@ -56,35 +56,6 @@ const Banner = () => {
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
 
-              {connectedAddress ? (
-                <>
-                  <div className="token-acquired-title">Your $ALT Balance</div>
-                  <div>
-                    {getTotalValue() ? (
-                      <>
-                        <span className="token-acquired">
-                          {totalAgriTokenBought} ALT{" "}
-                        </span>{" "}
-                        {getTotalValue() ? (
-                          <span className="equivalent-usd">{`(~ $${getTotalValue()})`}</span>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    ) : (
-                      <> </>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <div className={"banner-connectBtn"}>
-                  <ConnectWallet
-                    modalTitleIconUrl="/assets/img/banner/logo.png"
-                    modalTitle="AGRILAND"
-                  />
-                </div>
-              )}
-
               {timerEndTimeStamp && !isEndTimeStamp && (
                 <>
                   <div className="banner-countdown-wrap">
