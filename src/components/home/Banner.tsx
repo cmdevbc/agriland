@@ -64,7 +64,7 @@ const Banner = () => {
                     </div>
                   </div>
                   <div className="banner-content text-center banner-sub-title">
-                    Countdown to Binance, OKX and MEXC listing AGRI
+                    Countdown to Binance, OKX and MEXC listing ALT
                   </div>
                 </>
               )}
