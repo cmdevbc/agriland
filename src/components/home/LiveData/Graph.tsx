@@ -106,7 +106,7 @@ function Graph({}: Props) {
       },
       y: {
         min: 0,
-        max: 5,
+        max: max + 2.5,
         // min: min - offsetValueForGraph,
         // max: max + offsetValueForGraph,
         position: "right",
