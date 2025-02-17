@@ -55,8 +55,9 @@ const Banner = () => {
                 <br /> <span>Seed the Future with Agriland Token</span>
               </h2>
               <p>Transforming Land Ownership One Token at a Time</p>
+              <p>Binance Launch Iminent</p>
 
-              {timerEndTimeStamp && !isEndTimeStamp && (
+              {/* {timerEndTimeStamp && !isEndTimeStamp && (
                 <>
                   <div className="banner-countdown-wrap">
                     <div className="coming-time">
@@ -67,7 +68,7 @@ const Banner = () => {
                     Countdown to Binance, OKX and MEXC listing ALT
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           </div>
         </div>
